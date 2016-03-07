@@ -13,9 +13,9 @@
 
 	switch (SERVER_INSTANCE) {
 		case 'dev':
-			define ('__DOCROOT__', '/Library/WebServer/Documents/');
+			define ('__DOCROOT__', 'C:/wamp/www');
 			define ('__VIRTUAL_DIRECTORY__', '');
-			define ('__SUBDIRECTORY__', '/gcadmin/www');
+			define ('__SUBDIRECTORY__', '/greencampusadmin/www/');
 
 			define('DB_CONNECTION_1', serialize(array(
 				'adapter' => 'MySqli5',
@@ -37,7 +37,7 @@
 			break;
 	}
 
-	define('ALLOW_REMOTE_ADMIN', false);
+	define('ALLOW_REMOTE_ADMIN', true);
 	define ('__URL_REWRITE__', 'none');
 
 	define ('__DEVTOOLS_CLI__', __DOCROOT__ . __SUBDIRECTORY__ . '/../cli');

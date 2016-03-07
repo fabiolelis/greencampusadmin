@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Password Protected Area"
+AuthUserFile C:/wamp/www/greencampusadmin/.htpasswd
+Require valid-user
