@@ -15,13 +15,13 @@
 		case 'dev':
 			define ('__DOCROOT__', '/Library/WebServer/Documents/');
 			define ('__VIRTUAL_DIRECTORY__', '');
-			define ('__SUBDIRECTORY__', '/gcadmin/www');
+			define ('__SUBDIRECTORY__', '/gcadmin2/www');
 
 			define('DB_CONNECTION_1', serialize(array(
 				'adapter' => 'MySqli5',
 				'server' => '127.0.0.1:3306',
 				'port' => null,
-				'database' => 'woodland',
+				'database' => 'greencampus',
 				'username' => 'root',
 				'password' => '',
 				'profiling' => false)));

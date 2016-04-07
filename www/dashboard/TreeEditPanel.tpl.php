@@ -5,9 +5,13 @@
 	// code re-generations do not overwrite your changes.
 ?>
 	<div id="formControls">
-		<?php $_CONTROL->lblIdTree->RenderWithName(); ?>
+		<?php $_CONTROL->lblIdtree->RenderWithName(); ?>
 
-		<?php $_CONTROL->txtName->RenderWithName(); ?>
+		<?php $_CONTROL->lstSpeciesIdspeciesObject->RenderWithName(); ?>
+
+		<?php $_CONTROL->txtLongitude->RenderWithName(); ?>
+
+		<?php $_CONTROL->txtLatitude->RenderWithName(); ?>
 
 		<?php $_CONTROL->txtAge->RenderWithName(); ?>
 

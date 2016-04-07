@@ -1,6 +1,6 @@
 <?php
 	// Include prepend.inc to load Qcodo
-	require(dirname(__FILE__) . '/../../includes/prepend.inc.php');
+	require(dirname(__FILE__) . '/../includes/prepend.inc.php');
 
 	// Security check for ALLOW_REMOTE_ADMIN
 	// To allow access REGARDLESS of ALLOW_REMOTE_ADMIN, simply remove the line below
@@ -31,7 +31,7 @@
 	// Sort the list of objects
 	ksort($strObjectArray);
 
-	$strPageTitle = QApplication::Translate('List of Form Drafts');
+	$strPageTitle = QApplication::Translate('List of Form');
 	require(__INCLUDES__ . '/header.inc.php');
 ?>
 

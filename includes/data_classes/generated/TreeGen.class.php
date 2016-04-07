@@ -15,9 +15,12 @@
 	 * 
 	 * @package My Application
 	 * @subpackage GeneratedDataObjects
-	 * @property integer $IdTree the value for intIdTree (Read-Only PK)
-	 * @property string $Name the value for strName 
+	 * @property integer $Idtree the value for intIdtree (Read-Only PK)
+	 * @property integer $SpeciesIdspecies the value for intSpeciesIdspecies (Not Null)
+	 * @property string $Longitude the value for strLongitude 
+	 * @property string $Latitude the value for strLatitude 
 	 * @property integer $Age the value for intAge 
+	 * @property Species $SpeciesIdspeciesObject the value for the Species object referenced by intSpeciesIdspecies (Not Null)
 	 * @property boolean $__Restored whether or not this object was restored from the database (as opposed to created new)
 	 */
 	class TreeGen extends QBaseClass {
@@ -27,20 +30,37 @@
 		///////////////////////////////////////////////////////////////////////
 		
 		/**
-		 * Protected member variable that maps to the database PK Identity column tree.id_tree
-		 * @var integer intIdTree
+		 * Protected member variable that maps to the database PK Identity column tree.idtree
+		 * @var integer intIdtree
 		 */
-		protected $intIdTree;
-		const IdTreeDefault = null;
+		protected $intIdtree;
+		const IdtreeDefault = null;
 
 
 		/**
-		 * Protected member variable that maps to the database column tree.name
-		 * @var string strName
+		 * Protected member variable that maps to the database column tree.species_idspecies
+		 * @var integer intSpeciesIdspecies
 		 */
-		protected $strName;
-		const NameMaxLength = 45;
-		const NameDefault = null;
+		protected $intSpeciesIdspecies;
+		const SpeciesIdspeciesDefault = null;
+
+
+		/**
+		 * Protected member variable that maps to the database column tree.longitude
+		 * @var string strLongitude
+		 */
+		protected $strLongitude;
+		const LongitudeMaxLength = 45;
+		const LongitudeDefault = null;
+
+
+		/**
+		 * Protected member variable that maps to the database column tree.latitude
+		 * @var string strLatitude
+		 */
+		protected $strLatitude;
+		const LatitudeMaxLength = 45;
+		const LatitudeDefault = null;
 
 
 		/**
@@ -73,6 +93,16 @@
 		// PROTECTED MEMBER OBJECTS
 		///////////////////////////////
 
+		/**
+		 * Protected member variable that contains the object pointed by the reference
+		 * in the database column tree.species_idspecies.
+		 *
+		 * NOTE: Always use the SpeciesIdspeciesObject property getter to correctly retrieve this Species object.
+		 * (Because this class implements late binding, this variable reference MAY be null.)
+		 * @var Species objSpeciesIdspeciesObject
+		 */
+		protected $objSpeciesIdspeciesObject;
+
 
 
 
@@ -91,13 +121,13 @@
 
 		/**
 		 * Load a Tree from PK Info
-		 * @param integer $intIdTree
+		 * @param integer $intIdtree
 		 * @return Tree
 		 */
-		public static function Load($intIdTree) {
+		public static function Load($intIdtree) {
 			// Use QuerySingle to Perform the Query
 			return Tree::QuerySingle(
-				QQ::Equal(QQN::Tree()->IdTree, $intIdTree)
+				QQ::Equal(QQN::Tree()->Idtree, $intIdtree)
 			);
 		}
 
@@ -383,8 +413,10 @@
 				$strAliasPrefix = '';
 			}
 
-			$objBuilder->AddSelectItem($strTableName, 'id_tree', $strAliasPrefix . 'id_tree');
-			$objBuilder->AddSelectItem($strTableName, 'name', $strAliasPrefix . 'name');
+			$objBuilder->AddSelectItem($strTableName, 'idtree', $strAliasPrefix . 'idtree');
+			$objBuilder->AddSelectItem($strTableName, 'species_idspecies', $strAliasPrefix . 'species_idspecies');
+			$objBuilder->AddSelectItem($strTableName, 'longitude', $strAliasPrefix . 'longitude');
+			$objBuilder->AddSelectItem($strTableName, 'latitude', $strAliasPrefix . 'latitude');
 			$objBuilder->AddSelectItem($strTableName, 'age', $strAliasPrefix . 'age');
 		}
 
@@ -417,10 +449,14 @@
 			$objToReturn = new Tree();
 			$objToReturn->__blnRestored = true;
 
-			$strAliasName = array_key_exists($strAliasPrefix . 'id_tree', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'id_tree'] : $strAliasPrefix . 'id_tree';
-			$objToReturn->intIdTree = $objDbRow->GetColumn($strAliasName, 'Integer');
-			$strAliasName = array_key_exists($strAliasPrefix . 'name', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'name'] : $strAliasPrefix . 'name';
-			$objToReturn->strName = $objDbRow->GetColumn($strAliasName, 'VarChar');
+			$strAliasName = array_key_exists($strAliasPrefix . 'idtree', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'idtree'] : $strAliasPrefix . 'idtree';
+			$objToReturn->intIdtree = $objDbRow->GetColumn($strAliasName, 'Integer');
+			$strAliasName = array_key_exists($strAliasPrefix . 'species_idspecies', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'species_idspecies'] : $strAliasPrefix . 'species_idspecies';
+			$objToReturn->intSpeciesIdspecies = $objDbRow->GetColumn($strAliasName, 'Integer');
+			$strAliasName = array_key_exists($strAliasPrefix . 'longitude', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'longitude'] : $strAliasPrefix . 'longitude';
+			$objToReturn->strLongitude = $objDbRow->GetColumn($strAliasName, 'VarChar');
+			$strAliasName = array_key_exists($strAliasPrefix . 'latitude', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'latitude'] : $strAliasPrefix . 'latitude';
+			$objToReturn->strLatitude = $objDbRow->GetColumn($strAliasName, 'VarChar');
 			$strAliasName = array_key_exists($strAliasPrefix . 'age', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'age'] : $strAliasPrefix . 'age';
 			$objToReturn->intAge = $objDbRow->GetColumn($strAliasName, 'Integer');
 
@@ -435,6 +471,12 @@
 			// Prepare to Check for Early/Virtual Binding
 			if (!$strAliasPrefix)
 				$strAliasPrefix = 'tree__';
+
+			// Check for SpeciesIdspeciesObject Early Binding
+			$strAlias = $strAliasPrefix . 'species_idspecies__idspecies';
+			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
+			if (!is_null($objDbRow->GetColumn($strAliasName)))
+				$objToReturn->objSpeciesIdspeciesObject = Species::InstantiateDbRow($objDbRow, $strAliasPrefix . 'species_idspecies__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 
 
 
@@ -512,13 +554,47 @@
 			
 		/**
 		 * Load a single Tree object,
-		 * by IdTree Index(es)
-		 * @param integer $intIdTree
+		 * by Idtree Index(es)
+		 * @param integer $intIdtree
 		 * @return Tree
 		*/
-		public static function LoadByIdTree($intIdTree, $objOptionalClauses = null) {
+		public static function LoadByIdtree($intIdtree, $objOptionalClauses = null) {
 			return Tree::QuerySingle(
-				QQ::Equal(QQN::Tree()->IdTree, $intIdTree)
+				QQ::Equal(QQN::Tree()->Idtree, $intIdtree)
+			, $objOptionalClauses
+			);
+		}
+			
+		/**
+		 * Load an array of Tree objects,
+		 * by SpeciesIdspecies Index(es)
+		 * @param integer $intSpeciesIdspecies
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return Tree[]
+		*/
+		public static function LoadArrayBySpeciesIdspecies($intSpeciesIdspecies, $objOptionalClauses = null) {
+			// Call Tree::QueryArray to perform the LoadArrayBySpeciesIdspecies query
+			try {
+				return Tree::QueryArray(
+					QQ::Equal(QQN::Tree()->SpeciesIdspecies, $intSpeciesIdspecies),
+					$objOptionalClauses
+					);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
+
+		/**
+		 * Count Trees
+		 * by SpeciesIdspecies Index(es)
+		 * @param integer $intSpeciesIdspecies
+		 * @return int
+		*/
+		public static function CountBySpeciesIdspecies($intSpeciesIdspecies, $objOptionalClauses = null) {
+			// Call Tree::QueryCount to perform the CountBySpeciesIdspecies query
+			return Tree::QueryCount(
+				QQ::Equal(QQN::Tree()->SpeciesIdspecies, $intSpeciesIdspecies)
 			, $objOptionalClauses
 			);
 		}
@@ -553,16 +629,20 @@
 					// Perform an INSERT query
 					$objDatabase->NonQuery('
 						INSERT INTO `tree` (
-							`name`,
+							`species_idspecies`,
+							`longitude`,
+							`latitude`,
 							`age`
 						) VALUES (
-							' . $objDatabase->SqlVariable($this->strName) . ',
+							' . $objDatabase->SqlVariable($this->intSpeciesIdspecies) . ',
+							' . $objDatabase->SqlVariable($this->strLongitude) . ',
+							' . $objDatabase->SqlVariable($this->strLatitude) . ',
 							' . $objDatabase->SqlVariable($this->intAge) . '
 						)
 					');
 
 					// Update Identity column and return its value
-					$mixToReturn = $this->intIdTree = $objDatabase->InsertId('tree', 'id_tree');
+					$mixToReturn = $this->intIdtree = $objDatabase->InsertId('tree', 'idtree');
 
 					// Journaling
 					if ($objDatabase->JournalingDatabase) $this->Journal('INSERT');
@@ -577,10 +657,12 @@
 						UPDATE
 							`tree`
 						SET
-							`name` = ' . $objDatabase->SqlVariable($this->strName) . ',
+							`species_idspecies` = ' . $objDatabase->SqlVariable($this->intSpeciesIdspecies) . ',
+							`longitude` = ' . $objDatabase->SqlVariable($this->strLongitude) . ',
+							`latitude` = ' . $objDatabase->SqlVariable($this->strLatitude) . ',
 							`age` = ' . $objDatabase->SqlVariable($this->intAge) . '
 						WHERE
-							`id_tree` = ' . $objDatabase->SqlVariable($this->intIdTree) . '
+							`idtree` = ' . $objDatabase->SqlVariable($this->intIdtree) . '
 					');
 
 					// Journaling
@@ -605,7 +687,7 @@
 		 * @return void
 		 */
 		public function Delete() {
-			if ((is_null($this->intIdTree)))
+			if ((is_null($this->intIdtree)))
 				throw new QUndefinedPrimaryKeyException('Cannot delete this Tree with an unset primary key.');
 
 			// Get the Database Object for this Class
@@ -617,7 +699,7 @@
 				DELETE FROM
 					`tree`
 				WHERE
-					`id_tree` = ' . $objDatabase->SqlVariable($this->intIdTree) . '');
+					`idtree` = ' . $objDatabase->SqlVariable($this->intIdtree) . '');
 
 			// Journaling
 			if ($objDatabase->JournalingDatabase) $this->Journal('DELETE');
@@ -660,10 +742,12 @@
 				throw new QCallerException('Cannot call Reload() on a new, unsaved Tree object.');
 
 			// Reload the Object
-			$objReloaded = Tree::Load($this->intIdTree);
+			$objReloaded = Tree::Load($this->intIdtree);
 
 			// Update $this's local variables to match
-			$this->strName = $objReloaded->strName;
+			$this->SpeciesIdspecies = $objReloaded->SpeciesIdspecies;
+			$this->strLongitude = $objReloaded->strLongitude;
+			$this->strLatitude = $objReloaded->strLatitude;
 			$this->intAge = $objReloaded->intAge;
 		}
 
@@ -677,15 +761,19 @@
 
 			$objDatabase->NonQuery('
 				INSERT INTO `tree` (
-					`id_tree`,
-					`name`,
+					`idtree`,
+					`species_idspecies`,
+					`longitude`,
+					`latitude`,
 					`age`,
 					__sys_login_id,
 					__sys_action,
 					__sys_date
 				) VALUES (
-					' . $objDatabase->SqlVariable($this->intIdTree) . ',
-					' . $objDatabase->SqlVariable($this->strName) . ',
+					' . $objDatabase->SqlVariable($this->intIdtree) . ',
+					' . $objDatabase->SqlVariable($this->intSpeciesIdspecies) . ',
+					' . $objDatabase->SqlVariable($this->strLongitude) . ',
+					' . $objDatabase->SqlVariable($this->strLatitude) . ',
 					' . $objDatabase->SqlVariable($this->intAge) . ',
 					' . (($objDatabase->JournaledById) ? $objDatabase->JournaledById : 'NULL') . ',
 					' . $objDatabase->SqlVariable($strJournalCommand) . ',
@@ -697,14 +785,14 @@
 		/**
 		 * Gets the historical journal for an object from the log database.
 		 * Objects will have VirtualAttributes available to lookup login, date, and action information from the journal object.
-		 * @param integer intIdTree
+		 * @param integer intIdtree
 		 * @return Tree[]
 		 */
-		public static function GetJournalForId($intIdTree) {
+		public static function GetJournalForId($intIdtree) {
 			$objDatabase = Tree::GetDatabase()->JournalingDatabase;
 
-			$objResult = $objDatabase->Query('SELECT * FROM tree WHERE id_tree = ' .
-				$objDatabase->SqlVariable($intIdTree) . ' ORDER BY __sys_date');
+			$objResult = $objDatabase->Query('SELECT * FROM tree WHERE idtree = ' .
+				$objDatabase->SqlVariable($intIdtree) . ' ORDER BY __sys_date');
 
 			return Tree::InstantiateDbResult($objResult);
 		}
@@ -715,7 +803,7 @@
 		 * @return Tree[]
 		 */
 		public function GetJournal() {
-			return Tree::GetJournalForId($this->intIdTree);
+			return Tree::GetJournalForId($this->intIdtree);
 		}
 
 
@@ -737,15 +825,25 @@
 				///////////////////
 				// Member Variables
 				///////////////////
-				case 'IdTree':
-					// Gets the value for intIdTree (Read-Only PK)
+				case 'Idtree':
+					// Gets the value for intIdtree (Read-Only PK)
 					// @return integer
-					return $this->intIdTree;
+					return $this->intIdtree;
 
-				case 'Name':
-					// Gets the value for strName 
+				case 'SpeciesIdspecies':
+					// Gets the value for intSpeciesIdspecies (Not Null)
+					// @return integer
+					return $this->intSpeciesIdspecies;
+
+				case 'Longitude':
+					// Gets the value for strLongitude 
 					// @return string
-					return $this->strName;
+					return $this->strLongitude;
+
+				case 'Latitude':
+					// Gets the value for strLatitude 
+					// @return string
+					return $this->strLatitude;
 
 				case 'Age':
 					// Gets the value for intAge 
@@ -756,6 +854,18 @@
 				///////////////////
 				// Member Objects
 				///////////////////
+				case 'SpeciesIdspeciesObject':
+					// Gets the value for the Species object referenced by intSpeciesIdspecies (Not Null)
+					// @return Species
+					try {
+						if ((!$this->objSpeciesIdspeciesObject) && (!is_null($this->intSpeciesIdspecies)))
+							$this->objSpeciesIdspeciesObject = Species::Load($this->intSpeciesIdspecies);
+						return $this->objSpeciesIdspeciesObject;
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
 
 				////////////////////////////
 				// Virtual Object References (Many to Many and Reverse References)
@@ -789,12 +899,35 @@
 				///////////////////
 				// Member Variables
 				///////////////////
-				case 'Name':
-					// Sets the value for strName 
+				case 'SpeciesIdspecies':
+					// Sets the value for intSpeciesIdspecies (Not Null)
+					// @param integer $mixValue
+					// @return integer
+					try {
+						$this->objSpeciesIdspeciesObject = null;
+						return ($this->intSpeciesIdspecies = QType::Cast($mixValue, QType::Integer));
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'Longitude':
+					// Sets the value for strLongitude 
 					// @param string $mixValue
 					// @return string
 					try {
-						return ($this->strName = QType::Cast($mixValue, QType::String));
+						return ($this->strLongitude = QType::Cast($mixValue, QType::String));
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'Latitude':
+					// Sets the value for strLatitude 
+					// @param string $mixValue
+					// @return string
+					try {
+						return ($this->strLatitude = QType::Cast($mixValue, QType::String));
 					} catch (QCallerException $objExc) {
 						$objExc->IncrementOffset();
 						throw $objExc;
@@ -815,6 +948,36 @@
 				///////////////////
 				// Member Objects
 				///////////////////
+				case 'SpeciesIdspeciesObject':
+					// Sets the value for the Species object referenced by intSpeciesIdspecies (Not Null)
+					// @param Species $mixValue
+					// @return Species
+					if (is_null($mixValue)) {
+						$this->intSpeciesIdspecies = null;
+						$this->objSpeciesIdspeciesObject = null;
+						return null;
+					} else {
+						// Make sure $mixValue actually is a Species object
+						try {
+							$mixValue = QType::Cast($mixValue, 'Species');
+						} catch (QInvalidCastException $objExc) {
+							$objExc->IncrementOffset();
+							throw $objExc;
+						} 
+
+						// Make sure $mixValue is a SAVED Species object
+						if (is_null($mixValue->Idspecies))
+							throw new QCallerException('Unable to set an unsaved SpeciesIdspeciesObject for this Tree');
+
+						// Update Local Member Variables
+						$this->objSpeciesIdspeciesObject = $mixValue;
+						$this->intSpeciesIdspecies = $mixValue->Idspecies;
+
+						// Return $mixValue
+						return $mixValue;
+					}
+					break;
+
 				default:
 					try {
 						return parent::__set($strName, $mixValue);
@@ -852,8 +1015,10 @@
 
 		public static function GetSoapComplexTypeXml() {
 			$strToReturn = '<complexType name="Tree"><sequence>';
-			$strToReturn .= '<element name="IdTree" type="xsd:int"/>';
-			$strToReturn .= '<element name="Name" type="xsd:string"/>';
+			$strToReturn .= '<element name="Idtree" type="xsd:int"/>';
+			$strToReturn .= '<element name="SpeciesIdspeciesObject" type="xsd1:Species"/>';
+			$strToReturn .= '<element name="Longitude" type="xsd:string"/>';
+			$strToReturn .= '<element name="Latitude" type="xsd:string"/>';
 			$strToReturn .= '<element name="Age" type="xsd:int"/>';
 			$strToReturn .= '<element name="__blnRestored" type="xsd:boolean"/>';
 			$strToReturn .= '</sequence></complexType>';
@@ -863,6 +1028,7 @@
 		public static function AlterSoapComplexTypeArray(&$strComplexTypeArray) {
 			if (!array_key_exists('Tree', $strComplexTypeArray)) {
 				$strComplexTypeArray['Tree'] = Tree::GetSoapComplexTypeXml();
+				Species::AlterSoapComplexTypeArray($strComplexTypeArray);
 			}
 		}
 
@@ -877,10 +1043,15 @@
 
 		public static function GetObjectFromSoapObject($objSoapObject) {
 			$objToReturn = new Tree();
-			if (property_exists($objSoapObject, 'IdTree'))
-				$objToReturn->intIdTree = $objSoapObject->IdTree;
-			if (property_exists($objSoapObject, 'Name'))
-				$objToReturn->strName = $objSoapObject->Name;
+			if (property_exists($objSoapObject, 'Idtree'))
+				$objToReturn->intIdtree = $objSoapObject->Idtree;
+			if ((property_exists($objSoapObject, 'SpeciesIdspeciesObject')) &&
+				($objSoapObject->SpeciesIdspeciesObject))
+				$objToReturn->SpeciesIdspeciesObject = Species::GetObjectFromSoapObject($objSoapObject->SpeciesIdspeciesObject);
+			if (property_exists($objSoapObject, 'Longitude'))
+				$objToReturn->strLongitude = $objSoapObject->Longitude;
+			if (property_exists($objSoapObject, 'Latitude'))
+				$objToReturn->strLatitude = $objSoapObject->Latitude;
 			if (property_exists($objSoapObject, 'Age'))
 				$objToReturn->intAge = $objSoapObject->Age;
 			if (property_exists($objSoapObject, '__blnRestored'))
@@ -901,6 +1072,10 @@
 		}
 
 		public static function GetSoapObjectFromObject($objObject, $blnBindRelatedObjects) {
+			if ($objObject->objSpeciesIdspeciesObject)
+				$objObject->objSpeciesIdspeciesObject = Species::GetSoapObjectFromObject($objObject->objSpeciesIdspeciesObject, false);
+			else if (!$blnBindRelatedObjects)
+				$objObject->intSpeciesIdspecies = null;
 			return $objObject;
 		}
 
@@ -916,25 +1091,34 @@
 	/////////////////////////////////////
 
 	/**
-	 * @property-read QQNode $IdTree
-	 * @property-read QQNode $Name
+	 * @property-read QQNode $Idtree
+	 * @property-read QQNode $SpeciesIdspecies
+	 * @property-read QQNodeSpecies $SpeciesIdspeciesObject
+	 * @property-read QQNode $Longitude
+	 * @property-read QQNode $Latitude
 	 * @property-read QQNode $Age
 	 */
 	class QQNodeTree extends QQNode {
 		protected $strTableName = 'tree';
-		protected $strPrimaryKey = 'id_tree';
+		protected $strPrimaryKey = 'idtree';
 		protected $strClassName = 'Tree';
 		public function __get($strName) {
 			switch ($strName) {
-				case 'IdTree':
-					return new QQNode('id_tree', 'IdTree', 'integer', $this);
-				case 'Name':
-					return new QQNode('name', 'Name', 'string', $this);
+				case 'Idtree':
+					return new QQNode('idtree', 'Idtree', 'integer', $this);
+				case 'SpeciesIdspecies':
+					return new QQNode('species_idspecies', 'SpeciesIdspecies', 'integer', $this);
+				case 'SpeciesIdspeciesObject':
+					return new QQNodeSpecies('species_idspecies', 'SpeciesIdspeciesObject', 'integer', $this);
+				case 'Longitude':
+					return new QQNode('longitude', 'Longitude', 'string', $this);
+				case 'Latitude':
+					return new QQNode('latitude', 'Latitude', 'string', $this);
 				case 'Age':
 					return new QQNode('age', 'Age', 'integer', $this);
 
 				case '_PrimaryKeyNode':
-					return new QQNode('id_tree', 'IdTree', 'integer', $this);
+					return new QQNode('idtree', 'Idtree', 'integer', $this);
 				default:
 					try {
 						return parent::__get($strName);
@@ -947,26 +1131,35 @@
 	}
 	
 	/**
-	 * @property-read QQNode $IdTree
-	 * @property-read QQNode $Name
+	 * @property-read QQNode $Idtree
+	 * @property-read QQNode $SpeciesIdspecies
+	 * @property-read QQNodeSpecies $SpeciesIdspeciesObject
+	 * @property-read QQNode $Longitude
+	 * @property-read QQNode $Latitude
 	 * @property-read QQNode $Age
 	 * @property-read QQNode $_PrimaryKeyNode
 	 */
 	class QQReverseReferenceNodeTree extends QQReverseReferenceNode {
 		protected $strTableName = 'tree';
-		protected $strPrimaryKey = 'id_tree';
+		protected $strPrimaryKey = 'idtree';
 		protected $strClassName = 'Tree';
 		public function __get($strName) {
 			switch ($strName) {
-				case 'IdTree':
-					return new QQNode('id_tree', 'IdTree', 'integer', $this);
-				case 'Name':
-					return new QQNode('name', 'Name', 'string', $this);
+				case 'Idtree':
+					return new QQNode('idtree', 'Idtree', 'integer', $this);
+				case 'SpeciesIdspecies':
+					return new QQNode('species_idspecies', 'SpeciesIdspecies', 'integer', $this);
+				case 'SpeciesIdspeciesObject':
+					return new QQNodeSpecies('species_idspecies', 'SpeciesIdspeciesObject', 'integer', $this);
+				case 'Longitude':
+					return new QQNode('longitude', 'Longitude', 'string', $this);
+				case 'Latitude':
+					return new QQNode('latitude', 'Latitude', 'string', $this);
 				case 'Age':
 					return new QQNode('age', 'Age', 'integer', $this);
 
 				case '_PrimaryKeyNode':
-					return new QQNode('id_tree', 'IdTree', 'integer', $this);
+					return new QQNode('idtree', 'Idtree', 'integer', $this);
 				default:
 					try {
 						return parent::__get($strName);

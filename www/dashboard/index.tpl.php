@@ -2,8 +2,8 @@
 <?php $this->RenderBegin(); ?>
 
 	<div id="titleBar">
-		<h2 id="right"><a href="<?php _p(__VIRTUAL_DIRECTORY__ ) ?>/index.php">&laquo; <?php _t('Go to "Form"'); ?></a></h2>
-		<h2><?php _t('Panel') ?></h2>
+		<h2 id="right"><a href="<?php _p(__VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__) ?>/index.php">&laquo; <?php _t('Go to "Form"'); ?></a></h2>
+		<h2><?php _t('Panel Drafts') ?></h2>
 		<h1><?php $this->pnlTitle->Render(); ?></h1>
 	</div>
 
@@ -21,8 +21,8 @@
 	
 	<div id="draftList">
 		<p>&nbsp;</p>
-		<h1><?php _t('Form') ?></h1>
-		<p class="create"><a href="<?php _p(__VIRTUAL_DIRECTORY__ ) ?>"><?php _t('Go to "Form"') ?></a></p>
+		<h1><?php _t('Form Drafts') ?></h1>
+		<p class="create"><a href="<?php _p(__VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__) ?>"><?php _t('Go to "Form"') ?></a></p>
 	</div>
 	
 <?php $this->RenderEnd(); ?>

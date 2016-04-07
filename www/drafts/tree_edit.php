@@ -23,8 +23,10 @@
 		protected $mctTree;
 
 		// Controls for Tree's Data Fields
-		protected $lblIdTree;
-		protected $txtName;
+		protected $lblIdtree;
+		protected $lstSpeciesIdspeciesObject;
+		protected $txtLongitude;
+		protected $txtLatitude;
 		protected $txtAge;
 
 		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
@@ -52,8 +54,10 @@
 			$this->mctTree = TreeMetaControl::CreateFromPathInfo($this);
 
 			// Call MetaControl's methods to create qcontrols based on Tree's data fields
-			$this->lblIdTree = $this->mctTree->lblIdTree_Create();
-			$this->txtName = $this->mctTree->txtName_Create();
+			$this->lblIdtree = $this->mctTree->lblIdtree_Create();
+			$this->lstSpeciesIdspeciesObject = $this->mctTree->lstSpeciesIdspeciesObject_Create();
+			$this->txtLongitude = $this->mctTree->txtLongitude_Create();
+			$this->txtLatitude = $this->mctTree->txtLatitude_Create();
 			$this->txtAge = $this->mctTree->txtAge_Create();
 
 			// Create Buttons and Actions on this Form

@@ -31,12 +31,12 @@
 	// Sort the list of objects
 	ksort($strObjectArray);
 
-	$strPageTitle = QApplication::Translate('List of Form Drafts');
+	$strPageTitle = QApplication::Translate('List of Form');
 	require(__INCLUDES__ . '/header.inc.php');
 ?>
 
 	<div id="titleBar">
-		<h2 id="right"><a href="<?php _p(__VIRTUAL_DIRECTORY__ . __PANEL_DRAFTS__) ?>/index.php">&laquo; <?php _t('Go to "Panel Drafts"'); ?></a></h2>
+		<h2 id="right"><a href="<?php _p(__VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__) ?>/index.php">&laquo; <?php _t('Go to "Panel"'); ?></a></h2>
 		<h2><?php _t('Form Drafts') ?></h2>
 		<h1><?php _t('List of Form Drafts') ?></h1>
 	</div>
@@ -45,13 +45,13 @@
 <?php
 		foreach ($strObjectArray as $strObject=>$blnValue) {
 			printf('<h1>%s</h1><p class="create"><a href="%s/%s_list.php">%s</a> &nbsp;|&nbsp; <a href="%s/%s_edit.php">%s</a></p>',
-				$strObject, __VIRTUAL_DIRECTORY__ . __FORM_DRAFTS__, $strObject, QApplication::Translate('View List'),
-				__VIRTUAL_DIRECTORY__ . __FORM_DRAFTS__, $strObject, QApplication::Translate('Create New'));
+				$strObject, __VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__, $strObject, QApplication::Translate('View List'),
+				__VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__, $strObject, QApplication::Translate('Create New'));
 		}
 ?>
 		<p>&nbsp;</p>
-		<h1><?php _t('Panel Drafts') ?></h1>
-		<p class="create"><a href="<?php _p(__VIRTUAL_DIRECTORY__ . __PANEL_DRAFTS__) ?>"><?php _t('Go to "Panel Drafts"') ?></a></p>
+		<h1><?php _t('Panel') ?></h1>
+		<p class="create"><a href="<?php _p(__VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__) ?>"><?php _t('Go to "Panel"') ?></a></p>
 	</div>
 
 <?php require (__INCLUDES__ . '/footer.inc.php'); ?>

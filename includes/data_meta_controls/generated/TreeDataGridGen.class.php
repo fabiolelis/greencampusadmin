@@ -187,10 +187,10 @@
 		public function MetaAddEditLinkColumn($strLinkUrl, $strLinkHtml = 'Edit', $strColumnTitle = 'Edit', $intArgumentType = QMetaControlArgumentType::PathInfo) {
 			switch ($intArgumentType) {
 				case QMetaControlArgumentType::QueryString:
-					$strLinkUrl .= '?intIdTree=<?=urlencode($_ITEM->IdTree)?>';
+					$strLinkUrl .= '?intIdtree=<?=urlencode($_ITEM->Idtree)?>';
 					break;
 				case QMetaControlArgumentType::PathInfo:
-					$strLinkUrl .= '/<?=str_replace("+","%20",urlencode($_ITEM->IdTree))?>';
+					$strLinkUrl .= '/<?=str_replace("+","%20",urlencode($_ITEM->Idtree))?>';
 					break;
 				default:
 					throw new QCallerException('Unable to pass arguments with this intArgumentType: ' . $intArgumentType);
@@ -212,7 +212,7 @@
 		 * @param string $strColumnTitle the HTML of the link text
 		 */
 		public function MetaAddEditProxyColumn(QControlProxy $pxyControl, $strLinkHtml = 'Edit', $strColumnTitle = 'Edit') {
-			$strHtml = '<a href="#" <?= $_FORM->GetControl("' . $pxyControl->ControlId . '")->RenderAsEvents($_ITEM->IdTree, false); ?>>' . QApplication::Translate($strLinkHtml) . '</a>';
+			$strHtml = '<a href="#" <?= $_FORM->GetControl("' . $pxyControl->ControlId . '")->RenderAsEvents($_ITEM->Idtree, false); ?>>' . QApplication::Translate($strLinkHtml) . '</a>';
 			$colEditColumn = new QDataGridColumn(QApplication::Translate($strColumnTitle), $strHtml, 'HtmlEntities=False');
 			$this->AddColumn($colEditColumn);
 			return $colEditColumn;
@@ -293,8 +293,11 @@
 				} else
 					throw new QCallerException('Content QQNode has a root table of "' . $mixContent->_RootTableName . '". Must be a root of "tree".');
 			} else if (is_string($mixContent)) switch ($mixContent) {
-				case 'IdTree': return QQN::Tree()->IdTree;
-				case 'Name': return QQN::Tree()->Name;
+				case 'Idtree': return QQN::Tree()->Idtree;
+				case 'SpeciesIdspecies': return QQN::Tree()->SpeciesIdspecies;
+				case 'SpeciesIdspeciesObject': return QQN::Tree()->SpeciesIdspeciesObject;
+				case 'Longitude': return QQN::Tree()->Longitude;
+				case 'Latitude': return QQN::Tree()->Latitude;
 				case 'Age': return QQN::Tree()->Age;
 				default: throw new QCallerException('Simple Property not found in TreeDataGrid content: ' . $mixContent);
 			} else if ($mixContent instanceof QQAssociationNode)

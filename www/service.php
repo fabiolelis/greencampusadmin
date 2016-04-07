@@ -15,7 +15,9 @@ if(isset($_POST['tree'])){
    $t->Age  = $tree->age;
    $t->Save();
 
-   var_dump($t);
+   $str = "Added new tree:\nID: " . $t->IdTree . "\nName: " . $t->Name . "\nAge: " . $t->Age;
+   echo $str;
+   //var_dump($t);
    
 }
 
@@ -38,10 +40,7 @@ if(isset($_GET) && strpos($_SERVER["QUERY_STRING"], 'tree') == true && strpos($_
    
    
    $str .= ']';
-   //echo "oir"; 
-   //echo $str;
    var_dump($str);
-   
    
 }
 

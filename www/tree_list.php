@@ -50,13 +50,15 @@
 			// Use the MetaDataGrid functionality to add Columns for this datagrid
 
 			// Create an Edit Column
-			$strEditPageUrl = __VIRTUAL_DIRECTORY__ . __FORM_DRAFTS__ . '/tree_edit.php';
+			$strEditPageUrl = __VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__ . '/tree_edit.php';
 			$this->dtgTrees->MetaAddEditLinkColumn($strEditPageUrl, 'Edit', 'Edit');
 
 			// Create the Other Columns (note that you can use strings for tree's properties, or you
 			// can traverse down QQN::tree() to display fields that are down the hierarchy)
-			$this->dtgTrees->MetaAddColumn('IdTree');
-			$this->dtgTrees->MetaAddColumn('Name');
+			$this->dtgTrees->MetaAddColumn('Idtree');
+			$this->dtgTrees->MetaAddColumn(QQN::Tree()->SpeciesIdspeciesObject->Name);
+			$this->dtgTrees->MetaAddColumn('Longitude');
+			$this->dtgTrees->MetaAddColumn('Latitude');
 			$this->dtgTrees->MetaAddColumn('Age');
 		}
 	}

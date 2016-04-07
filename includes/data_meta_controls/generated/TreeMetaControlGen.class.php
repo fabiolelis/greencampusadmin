@@ -16,10 +16,14 @@
 	 * @package My Application
 	 * @subpackage MetaControls
 	 * property-read Tree $Tree the actual Tree data class being edited
-	 * property QLabel $IdTreeControl
-	 * property-read QLabel $IdTreeLabel
-	 * property QTextBox $NameControl
-	 * property-read QLabel $NameLabel
+	 * property QLabel $IdtreeControl
+	 * property-read QLabel $IdtreeLabel
+	 * property QListBox $SpeciesIdspeciesControl
+	 * property-read QLabel $SpeciesIdspeciesLabel
+	 * property QTextBox $LongitudeControl
+	 * property-read QLabel $LongitudeLabel
+	 * property QTextBox $LatitudeControl
+	 * property-read QLabel $LatitudeLabel
 	 * property QIntegerTextBox $AgeControl
 	 * property-read QLabel $AgeLabel
 	 * property-read string $TitleVerb a verb indicating whether or not this is being edited or created
@@ -54,16 +58,28 @@
 
 		// Controls that allow the editing of Tree's individual data fields
         /**
-         * @var QLabel lblIdTree;
+         * @var QLabel lblIdtree;
          * @access protected
          */
-		protected $lblIdTree;
+		protected $lblIdtree;
 
         /**
-         * @var QTextBox txtName;
+         * @var QListBox lstSpeciesIdspeciesObject;
          * @access protected
          */
-		protected $txtName;
+		protected $lstSpeciesIdspeciesObject;
+
+        /**
+         * @var QTextBox txtLongitude;
+         * @access protected
+         */
+		protected $txtLongitude;
+
+        /**
+         * @var QTextBox txtLatitude;
+         * @access protected
+         */
+		protected $txtLatitude;
 
         /**
          * @var QIntegerTextBox txtAge;
@@ -74,10 +90,22 @@
 
 		// Controls that allow the viewing of Tree's individual data fields
         /**
-         * @var QLabel lblName
+         * @var QLabel lblSpeciesIdspecies
          * @access protected
          */
-		protected $lblName;
+		protected $lblSpeciesIdspecies;
+
+        /**
+         * @var QLabel lblLongitude
+         * @access protected
+         */
+		protected $lblLongitude;
+
+        /**
+         * @var QLabel lblLatitude
+         * @access protected
+         */
+		protected $lblLatitude;
 
         /**
          * @var QLabel lblAge
@@ -128,14 +156,14 @@
 		 * edit, or if we are also allowed to create a new one, etc.
 		 * 
 		 * @param mixed $objParentObject QForm or QPanel which will be using this TreeMetaControl
-		 * @param integer $intIdTree primary key value
+		 * @param integer $intIdtree primary key value
 		 * @param QMetaControlCreateType $intCreateType rules governing Tree object creation - defaults to CreateOrEdit
  		 * @return TreeMetaControl
 		 */
-		public static function Create($objParentObject, $intIdTree = null, $intCreateType = QMetaControlCreateType::CreateOrEdit) {
+		public static function Create($objParentObject, $intIdtree = null, $intCreateType = QMetaControlCreateType::CreateOrEdit) {
 			// Attempt to Load from PK Arguments
-			if (strlen($intIdTree)) {
-				$objTree = Tree::Load($intIdTree);
+			if (strlen($intIdtree)) {
+				$objTree = Tree::Load($intIdtree);
 
 				// Tree was found -- return it!
 				if ($objTree)
@@ -143,7 +171,7 @@
 
 				// If CreateOnRecordNotFound not specified, throw an exception
 				else if ($intCreateType != QMetaControlCreateType::CreateOnRecordNotFound)
-					throw new QCallerException('Could not find a Tree object with PK arguments: ' . $intIdTree);
+					throw new QCallerException('Could not find a Tree object with PK arguments: ' . $intIdtree);
 
 			// If EditOnly is specified, throw an exception
 			} else if ($intCreateType == QMetaControlCreateType::EditOnly)
@@ -161,8 +189,8 @@
 		 * @return TreeMetaControl
 		 */
 		public static function CreateFromPathInfo($objParentObject, $intCreateType = QMetaControlCreateType::CreateOrEdit) {
-			$intIdTree = QApplication::PathInfo(0);
-			return TreeMetaControl::Create($objParentObject, $intIdTree, $intCreateType);
+			$intIdtree = QApplication::PathInfo(0);
+			return TreeMetaControl::Create($objParentObject, $intIdtree, $intCreateType);
 		}
 
 		/**
@@ -173,8 +201,8 @@
 		 * @return TreeMetaControl
 		 */
 		public static function CreateFromQueryString($objParentObject, $intCreateType = QMetaControlCreateType::CreateOrEdit) {
-			$intIdTree = QApplication::QueryString('intIdTree');
-			return TreeMetaControl::Create($objParentObject, $intIdTree, $intCreateType);
+			$intIdtree = QApplication::QueryString('intIdtree');
+			return TreeMetaControl::Create($objParentObject, $intIdtree, $intCreateType);
 		}
 
 
@@ -184,43 +212,111 @@
 		///////////////////////////////////////////////
 
 		/**
-		 * Create and setup QLabel lblIdTree
+		 * Create and setup QLabel lblIdtree
 		 * @param string $strControlId optional ControlId to use
 		 * @return QLabel
 		 */
-		public function lblIdTree_Create($strControlId = null) {
-			$this->lblIdTree = new QLabel($this->objParentObject, $strControlId);
-			$this->lblIdTree->Name = QApplication::Translate('Id Tree');
+		public function lblIdtree_Create($strControlId = null) {
+			$this->lblIdtree = new QLabel($this->objParentObject, $strControlId);
+			$this->lblIdtree->Name = QApplication::Translate('Idtree');
 			if ($this->blnEditMode)
-				$this->lblIdTree->Text = $this->objTree->IdTree;
+				$this->lblIdtree->Text = $this->objTree->Idtree;
 			else
-				$this->lblIdTree->Text = 'N/A';
-			return $this->lblIdTree;
+				$this->lblIdtree->Text = 'N/A';
+			return $this->lblIdtree;
 		}
 
 		/**
-		 * Create and setup QTextBox txtName
+		 * Create and setup QListBox lstSpeciesIdspeciesObject
+		 * @param string $strControlId optional ControlId to use
+		 * @param QQCondition $objConditions override the default condition of QQ::All() to the query, itself
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause object or array of QQClause objects for the query
+		 * @return QListBox
+		 */
+		public function lstSpeciesIdspeciesObject_Create($strControlId = null, QQCondition $objCondition = null, $objOptionalClauses = null) {
+			$this->lstSpeciesIdspeciesObject = new QListBox($this->objParentObject, $strControlId);
+			$this->lstSpeciesIdspeciesObject->Name = QApplication::Translate('Species');
+			$this->lstSpeciesIdspeciesObject->Required = true;
+			if (!$this->blnEditMode)
+				$this->lstSpeciesIdspeciesObject->AddItem(QApplication::Translate('- Select One -'), null);
+
+			// Setup and perform the Query
+			if (is_null($objCondition)) $objCondition = QQ::All();
+			$objSpeciesIdspeciesObjectCursor = Species::QueryCursor($objCondition, $objOptionalClauses);
+
+			// Iterate through the Cursor
+			while ($objSpeciesIdspeciesObject = Species::InstantiateCursor($objSpeciesIdspeciesObjectCursor)) {
+				$objListItem = new QListItem($objSpeciesIdspeciesObject->Name, $objSpeciesIdspeciesObject->Idspecies);
+				if (($this->objTree->SpeciesIdspeciesObject) && ($this->objTree->SpeciesIdspeciesObject->Idspecies == $objSpeciesIdspeciesObject->Idspecies))
+					$objListItem->Selected = true;
+				$this->lstSpeciesIdspeciesObject->AddItem($objListItem);
+			}
+
+			// Return the QListBox
+			return $this->lstSpeciesIdspeciesObject;
+		}
+
+		/**
+		 * Create and setup QLabel lblSpeciesIdspecies
+		 * @param string $strControlId optional ControlId to use
+		 * @return QLabel
+		 */
+		public function lblSpeciesIdspecies_Create($strControlId = null) {
+			$this->lblSpeciesIdspecies = new QLabel($this->objParentObject, $strControlId);
+			$this->lblSpeciesIdspecies->Name = QApplication::Translate('Species Idspecies Object');
+			$this->lblSpeciesIdspecies->Text = ($this->objTree->SpeciesIdspeciesObject) ? $this->objTree->SpeciesIdspeciesObject->__toString() : null;
+			$this->lblSpeciesIdspecies->Required = true;
+			return $this->lblSpeciesIdspecies;
+		}
+
+		/**
+		 * Create and setup QTextBox txtLongitude
 		 * @param string $strControlId optional ControlId to use
 		 * @return QTextBox
 		 */
-		public function txtName_Create($strControlId = null) {
-			$this->txtName = new QTextBox($this->objParentObject, $strControlId);
-			$this->txtName->Name = QApplication::Translate('Name');
-			$this->txtName->Text = $this->objTree->Name;
-			$this->txtName->MaxLength = Tree::NameMaxLength;
-			return $this->txtName;
+		public function txtLongitude_Create($strControlId = null) {
+			$this->txtLongitude = new QTextBox($this->objParentObject, $strControlId);
+			$this->txtLongitude->Name = QApplication::Translate('Longitude');
+			$this->txtLongitude->Text = $this->objTree->Longitude;
+			$this->txtLongitude->MaxLength = Tree::LongitudeMaxLength;
+			return $this->txtLongitude;
 		}
 
 		/**
-		 * Create and setup QLabel lblName
+		 * Create and setup QLabel lblLongitude
 		 * @param string $strControlId optional ControlId to use
 		 * @return QLabel
 		 */
-		public function lblName_Create($strControlId = null) {
-			$this->lblName = new QLabel($this->objParentObject, $strControlId);
-			$this->lblName->Name = QApplication::Translate('Name');
-			$this->lblName->Text = $this->objTree->Name;
-			return $this->lblName;
+		public function lblLongitude_Create($strControlId = null) {
+			$this->lblLongitude = new QLabel($this->objParentObject, $strControlId);
+			$this->lblLongitude->Name = QApplication::Translate('Longitude');
+			$this->lblLongitude->Text = $this->objTree->Longitude;
+			return $this->lblLongitude;
+		}
+
+		/**
+		 * Create and setup QTextBox txtLatitude
+		 * @param string $strControlId optional ControlId to use
+		 * @return QTextBox
+		 */
+		public function txtLatitude_Create($strControlId = null) {
+			$this->txtLatitude = new QTextBox($this->objParentObject, $strControlId);
+			$this->txtLatitude->Name = QApplication::Translate('Latitude');
+			$this->txtLatitude->Text = $this->objTree->Latitude;
+			$this->txtLatitude->MaxLength = Tree::LatitudeMaxLength;
+			return $this->txtLatitude;
+		}
+
+		/**
+		 * Create and setup QLabel lblLatitude
+		 * @param string $strControlId optional ControlId to use
+		 * @return QLabel
+		 */
+		public function lblLatitude_Create($strControlId = null) {
+			$this->lblLatitude = new QLabel($this->objParentObject, $strControlId);
+			$this->lblLatitude->Name = QApplication::Translate('Latitude');
+			$this->lblLatitude->Text = $this->objTree->Latitude;
+			return $this->lblLatitude;
 		}
 
 		/**
@@ -260,10 +356,27 @@
 			if ($blnReload)
 				$this->objTree->Reload();
 
-			if ($this->lblIdTree) if ($this->blnEditMode) $this->lblIdTree->Text = $this->objTree->IdTree;
+			if ($this->lblIdtree) if ($this->blnEditMode) $this->lblIdtree->Text = $this->objTree->Idtree;
 
-			if ($this->txtName) $this->txtName->Text = $this->objTree->Name;
-			if ($this->lblName) $this->lblName->Text = $this->objTree->Name;
+			if ($this->lstSpeciesIdspeciesObject) {
+					$this->lstSpeciesIdspeciesObject->RemoveAllItems();
+				if (!$this->blnEditMode)
+					$this->lstSpeciesIdspeciesObject->AddItem(QApplication::Translate('- Select One -'), null);
+				$objSpeciesIdspeciesObjectArray = Species::LoadAll();
+				if ($objSpeciesIdspeciesObjectArray) foreach ($objSpeciesIdspeciesObjectArray as $objSpeciesIdspeciesObject) {
+					$objListItem = new QListItem($objSpeciesIdspeciesObject->__toString(), $objSpeciesIdspeciesObject->Idspecies);
+					if (($this->objTree->SpeciesIdspeciesObject) && ($this->objTree->SpeciesIdspeciesObject->Idspecies == $objSpeciesIdspeciesObject->Idspecies))
+						$objListItem->Selected = true;
+					$this->lstSpeciesIdspeciesObject->AddItem($objListItem);
+				}
+			}
+			if ($this->lblSpeciesIdspecies) $this->lblSpeciesIdspecies->Text = ($this->objTree->SpeciesIdspeciesObject) ? $this->objTree->SpeciesIdspeciesObject->__toString() : null;
+
+			if ($this->txtLongitude) $this->txtLongitude->Text = $this->objTree->Longitude;
+			if ($this->lblLongitude) $this->lblLongitude->Text = $this->objTree->Longitude;
+
+			if ($this->txtLatitude) $this->txtLatitude->Text = $this->objTree->Latitude;
+			if ($this->lblLatitude) $this->lblLatitude->Text = $this->objTree->Latitude;
 
 			if ($this->txtAge) $this->txtAge->Text = $this->objTree->Age;
 			if ($this->lblAge) $this->lblAge->Text = $this->objTree->Age;
@@ -291,7 +404,9 @@
 		public function SaveTree() {
 			try {
 				// Update any fields for controls that have been created
-				if ($this->txtName) $this->objTree->Name = $this->txtName->Text;
+				if ($this->lstSpeciesIdspeciesObject) $this->objTree->SpeciesIdspecies = $this->lstSpeciesIdspeciesObject->SelectedValue;
+				if ($this->txtLongitude) $this->objTree->Longitude = $this->txtLongitude->Text;
+				if ($this->txtLatitude) $this->objTree->Latitude = $this->txtLatitude->Text;
 				if ($this->txtAge) $this->objTree->Age = $this->txtAge->Text;
 
 				// Update any UniqueReverseReferences (if any) for controls that have been created for it
@@ -335,18 +450,30 @@
 				case 'EditMode': return $this->blnEditMode;
 
 				// Controls that point to Tree fields -- will be created dynamically if not yet created
-				case 'IdTreeControl':
-					if (!$this->lblIdTree) return $this->lblIdTree_Create();
-					return $this->lblIdTree;
-				case 'IdTreeLabel':
-					if (!$this->lblIdTree) return $this->lblIdTree_Create();
-					return $this->lblIdTree;
-				case 'NameControl':
-					if (!$this->txtName) return $this->txtName_Create();
-					return $this->txtName;
-				case 'NameLabel':
-					if (!$this->lblName) return $this->lblName_Create();
-					return $this->lblName;
+				case 'IdtreeControl':
+					if (!$this->lblIdtree) return $this->lblIdtree_Create();
+					return $this->lblIdtree;
+				case 'IdtreeLabel':
+					if (!$this->lblIdtree) return $this->lblIdtree_Create();
+					return $this->lblIdtree;
+				case 'SpeciesIdspeciesControl':
+					if (!$this->lstSpeciesIdspeciesObject) return $this->lstSpeciesIdspeciesObject_Create();
+					return $this->lstSpeciesIdspeciesObject;
+				case 'SpeciesIdspeciesLabel':
+					if (!$this->lblSpeciesIdspecies) return $this->lblSpeciesIdspecies_Create();
+					return $this->lblSpeciesIdspecies;
+				case 'LongitudeControl':
+					if (!$this->txtLongitude) return $this->txtLongitude_Create();
+					return $this->txtLongitude;
+				case 'LongitudeLabel':
+					if (!$this->lblLongitude) return $this->lblLongitude_Create();
+					return $this->lblLongitude;
+				case 'LatitudeControl':
+					if (!$this->txtLatitude) return $this->txtLatitude_Create();
+					return $this->txtLatitude;
+				case 'LatitudeLabel':
+					if (!$this->lblLatitude) return $this->lblLatitude_Create();
+					return $this->lblLatitude;
 				case 'AgeControl':
 					if (!$this->txtAge) return $this->txtAge_Create();
 					return $this->txtAge;
@@ -375,10 +502,14 @@
 			try {
 				switch ($strName) {
 					// Controls that point to Tree fields
-					case 'IdTreeControl':
-						return ($this->lblIdTree = QType::Cast($mixValue, 'QControl'));
-					case 'NameControl':
-						return ($this->txtName = QType::Cast($mixValue, 'QControl'));
+					case 'IdtreeControl':
+						return ($this->lblIdtree = QType::Cast($mixValue, 'QControl'));
+					case 'SpeciesIdspeciesControl':
+						return ($this->lstSpeciesIdspeciesObject = QType::Cast($mixValue, 'QControl'));
+					case 'LongitudeControl':
+						return ($this->txtLongitude = QType::Cast($mixValue, 'QControl'));
+					case 'LatitudeControl':
+						return ($this->txtLatitude = QType::Cast($mixValue, 'QControl'));
 					case 'AgeControl':
 						return ($this->txtAge = QType::Cast($mixValue, 'QControl'));
 					default:

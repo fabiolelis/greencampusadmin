@@ -20,8 +20,10 @@
 		protected $mctTree;
 
 		// Controls for Tree's Data Fields
-		public $lblIdTree;
-		public $txtName;
+		public $lblIdtree;
+		public $lstSpeciesIdspeciesObject;
+		public $txtLongitude;
+		public $txtLatitude;
 		public $txtAge;
 
 		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
@@ -34,7 +36,7 @@
 		// Callback
 		protected $strClosePanelMethod;
 
-		public function __construct($objParentObject, $strClosePanelMethod, $intIdTree = null, $strControlId = null) {
+		public function __construct($objParentObject, $strClosePanelMethod, $intIdtree = null, $strControlId = null) {
 			// Call the Parent
 			try {
 				parent::__construct($objParentObject, $strControlId);
@@ -49,11 +51,13 @@
 
 			// Construct the TreeMetaControl
 			// MAKE SURE we specify "$this" as the MetaControl's (and thus all subsequent controls') parent
-			$this->mctTree = TreeMetaControl::Create($this, $intIdTree);
+			$this->mctTree = TreeMetaControl::Create($this, $intIdtree);
 
 			// Call MetaControl's methods to create qcontrols based on Tree's data fields
-			$this->lblIdTree = $this->mctTree->lblIdTree_Create();
-			$this->txtName = $this->mctTree->txtName_Create();
+			$this->lblIdtree = $this->mctTree->lblIdtree_Create();
+			$this->lstSpeciesIdspeciesObject = $this->mctTree->lstSpeciesIdspeciesObject_Create();
+			$this->txtLongitude = $this->mctTree->txtLongitude_Create();
+			$this->txtLatitude = $this->mctTree->txtLatitude_Create();
 			$this->txtAge = $this->mctTree->txtAge_Create();
 
 			// Create Buttons and Actions on this Form
