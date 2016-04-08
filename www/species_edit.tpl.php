@@ -12,13 +12,15 @@
 	<?php $this->RenderBegin() ?>
 
 	<div id="titleBar">
-		<h2><?php _p($this->mctSpecies->TitleVerb); ?></h2>
+		<h2><?php _p('Species'); ?></h2>
 		<h1><?php _t('Species')?></h1>
 	</div>
 
 	<div id="formControls">
 
 		<?php $this->txtName->RenderWithName(); ?>
+
+		<?php $this->txtIrishname->RenderWithName(); ?>
 
 		<?php $this->txtLatinName->RenderWithName(); ?>
 

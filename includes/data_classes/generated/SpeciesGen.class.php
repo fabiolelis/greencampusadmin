@@ -17,6 +17,7 @@
 	 * @subpackage GeneratedDataObjects
 	 * @property integer $Idspecies the value for intIdspecies (Read-Only PK)
 	 * @property string $Name the value for strName (Not Null)
+	 * @property string $Irishname the value for strIrishname 
 	 * @property string $LatinName the value for strLatinName 
 	 * @property string $Description the value for strDescription 
 	 * @property Characteristic $_CharacteristicAsId the value for the private _objCharacteristicAsId (Read-Only) if set due to an expansion on the characteristic.species_idspecies reverse relationship
@@ -49,6 +50,15 @@
 
 
 		/**
+		 * Protected member variable that maps to the database column species.irishname
+		 * @var string strIrishname
+		 */
+		protected $strIrishname;
+		const IrishnameMaxLength = 45;
+		const IrishnameDefault = null;
+
+
+		/**
 		 * Protected member variable that maps to the database column species.latin_name
 		 * @var string strLatinName
 		 */
@@ -62,7 +72,7 @@
 		 * @var string strDescription
 		 */
 		protected $strDescription;
-		const DescriptionMaxLength = 45;
+		const DescriptionMaxLength = 2000;
 		const DescriptionDefault = null;
 
 
@@ -432,6 +442,7 @@
 
 			$objBuilder->AddSelectItem($strTableName, 'idspecies', $strAliasPrefix . 'idspecies');
 			$objBuilder->AddSelectItem($strTableName, 'name', $strAliasPrefix . 'name');
+			$objBuilder->AddSelectItem($strTableName, 'irishname', $strAliasPrefix . 'irishname');
 			$objBuilder->AddSelectItem($strTableName, 'latin_name', $strAliasPrefix . 'latin_name');
 			$objBuilder->AddSelectItem($strTableName, 'description', $strAliasPrefix . 'description');
 		}
@@ -515,6 +526,8 @@
 			$objToReturn->intIdspecies = $objDbRow->GetColumn($strAliasName, 'Integer');
 			$strAliasName = array_key_exists($strAliasPrefix . 'name', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'name'] : $strAliasPrefix . 'name';
 			$objToReturn->strName = $objDbRow->GetColumn($strAliasName, 'VarChar');
+			$strAliasName = array_key_exists($strAliasPrefix . 'irishname', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'irishname'] : $strAliasPrefix . 'irishname';
+			$objToReturn->strIrishname = $objDbRow->GetColumn($strAliasName, 'VarChar');
 			$strAliasName = array_key_exists($strAliasPrefix . 'latin_name', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'latin_name'] : $strAliasPrefix . 'latin_name';
 			$objToReturn->strLatinName = $objDbRow->GetColumn($strAliasName, 'VarChar');
 			$strAliasName = array_key_exists($strAliasPrefix . 'description', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'description'] : $strAliasPrefix . 'description';
@@ -670,10 +683,12 @@
 					$objDatabase->NonQuery('
 						INSERT INTO `species` (
 							`name`,
+							`irishname`,
 							`latin_name`,
 							`description`
 						) VALUES (
 							' . $objDatabase->SqlVariable($this->strName) . ',
+							' . $objDatabase->SqlVariable($this->strIrishname) . ',
 							' . $objDatabase->SqlVariable($this->strLatinName) . ',
 							' . $objDatabase->SqlVariable($this->strDescription) . '
 						)
@@ -696,6 +711,7 @@
 							`species`
 						SET
 							`name` = ' . $objDatabase->SqlVariable($this->strName) . ',
+							`irishname` = ' . $objDatabase->SqlVariable($this->strIrishname) . ',
 							`latin_name` = ' . $objDatabase->SqlVariable($this->strLatinName) . ',
 							`description` = ' . $objDatabase->SqlVariable($this->strDescription) . '
 						WHERE
@@ -783,6 +799,7 @@
 
 			// Update $this's local variables to match
 			$this->strName = $objReloaded->strName;
+			$this->strIrishname = $objReloaded->strIrishname;
 			$this->strLatinName = $objReloaded->strLatinName;
 			$this->strDescription = $objReloaded->strDescription;
 		}
@@ -799,6 +816,7 @@
 				INSERT INTO `species` (
 					`idspecies`,
 					`name`,
+					`irishname`,
 					`latin_name`,
 					`description`,
 					__sys_login_id,
@@ -807,6 +825,7 @@
 				) VALUES (
 					' . $objDatabase->SqlVariable($this->intIdspecies) . ',
 					' . $objDatabase->SqlVariable($this->strName) . ',
+					' . $objDatabase->SqlVariable($this->strIrishname) . ',
 					' . $objDatabase->SqlVariable($this->strLatinName) . ',
 					' . $objDatabase->SqlVariable($this->strDescription) . ',
 					' . (($objDatabase->JournaledById) ? $objDatabase->JournaledById : 'NULL') . ',
@@ -868,6 +887,11 @@
 					// Gets the value for strName (Not Null)
 					// @return string
 					return $this->strName;
+
+				case 'Irishname':
+					// Gets the value for strIrishname 
+					// @return string
+					return $this->strIrishname;
 
 				case 'LatinName':
 					// Gets the value for strLatinName 
@@ -946,6 +970,17 @@
 					// @return string
 					try {
 						return ($this->strName = QType::Cast($mixValue, QType::String));
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
+				case 'Irishname':
+					// Sets the value for strIrishname 
+					// @param string $mixValue
+					// @return string
+					try {
+						return ($this->strIrishname = QType::Cast($mixValue, QType::String));
 					} catch (QCallerException $objExc) {
 						$objExc->IncrementOffset();
 						throw $objExc;
@@ -1380,6 +1415,7 @@
 			$strToReturn = '<complexType name="Species"><sequence>';
 			$strToReturn .= '<element name="Idspecies" type="xsd:int"/>';
 			$strToReturn .= '<element name="Name" type="xsd:string"/>';
+			$strToReturn .= '<element name="Irishname" type="xsd:string"/>';
 			$strToReturn .= '<element name="LatinName" type="xsd:string"/>';
 			$strToReturn .= '<element name="Description" type="xsd:string"/>';
 			$strToReturn .= '<element name="__blnRestored" type="xsd:boolean"/>';
@@ -1408,6 +1444,8 @@
 				$objToReturn->intIdspecies = $objSoapObject->Idspecies;
 			if (property_exists($objSoapObject, 'Name'))
 				$objToReturn->strName = $objSoapObject->Name;
+			if (property_exists($objSoapObject, 'Irishname'))
+				$objToReturn->strIrishname = $objSoapObject->Irishname;
 			if (property_exists($objSoapObject, 'LatinName'))
 				$objToReturn->strLatinName = $objSoapObject->LatinName;
 			if (property_exists($objSoapObject, 'Description'))
@@ -1447,6 +1485,7 @@
 	/**
 	 * @property-read QQNode $Idspecies
 	 * @property-read QQNode $Name
+	 * @property-read QQNode $Irishname
 	 * @property-read QQNode $LatinName
 	 * @property-read QQNode $Description
 	 * @property-read QQReverseReferenceNodeCharacteristic $CharacteristicAsId
@@ -1462,6 +1501,8 @@
 					return new QQNode('idspecies', 'Idspecies', 'integer', $this);
 				case 'Name':
 					return new QQNode('name', 'Name', 'string', $this);
+				case 'Irishname':
+					return new QQNode('irishname', 'Irishname', 'string', $this);
 				case 'LatinName':
 					return new QQNode('latin_name', 'LatinName', 'string', $this);
 				case 'Description':
@@ -1487,6 +1528,7 @@
 	/**
 	 * @property-read QQNode $Idspecies
 	 * @property-read QQNode $Name
+	 * @property-read QQNode $Irishname
 	 * @property-read QQNode $LatinName
 	 * @property-read QQNode $Description
 	 * @property-read QQReverseReferenceNodeCharacteristic $CharacteristicAsId
@@ -1503,6 +1545,8 @@
 					return new QQNode('idspecies', 'Idspecies', 'integer', $this);
 				case 'Name':
 					return new QQNode('name', 'Name', 'string', $this);
+				case 'Irishname':
+					return new QQNode('irishname', 'Irishname', 'string', $this);
 				case 'LatinName':
 					return new QQNode('latin_name', 'LatinName', 'string', $this);
 				case 'Description':

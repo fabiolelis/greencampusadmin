@@ -19,6 +19,8 @@
 	<div id="formControls">
 		<?php $this->lblIdcharacteristic->RenderWithName(); ?>
 
+		<?php $this->lstSpeciesIdspeciesObject->RenderWithName(); ?>
+
 		<?php $this->txtTitle->RenderWithName(); ?>
 
 		<?php $this->txtDescription->RenderWithName(); ?>
@@ -26,8 +28,6 @@
 		<?php $this->txtPicturesPath->RenderWithName(); ?>
 
 		<?php $this->lstCharacteristicIdcharacteristicObject->RenderWithName(); ?>
-
-		<?php $this->lstSpeciesIdspeciesObject->RenderWithName(); ?>
 
 		<?php $this->txtIdentifier->RenderWithName(); ?>
 

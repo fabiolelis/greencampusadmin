@@ -21,6 +21,8 @@
 
 		<?php $this->txtName->RenderWithName(); ?>
 
+		<?php $this->txtIrishname->RenderWithName(); ?>
+
 		<?php $this->txtLatinName->RenderWithName(); ?>
 
 		<?php $this->txtDescription->RenderWithName(); ?>

@@ -295,6 +295,7 @@
 			} else if (is_string($mixContent)) switch ($mixContent) {
 				case 'Idspecies': return QQN::Species()->Idspecies;
 				case 'Name': return QQN::Species()->Name;
+				case 'Irishname': return QQN::Species()->Irishname;
 				case 'LatinName': return QQN::Species()->LatinName;
 				case 'Description': return QQN::Species()->Description;
 				default: throw new QCallerException('Simple Property not found in SpeciesDataGrid content: ' . $mixContent);

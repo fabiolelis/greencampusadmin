@@ -19,5 +19,17 @@
 	 * @subpackage MetaControls
 	 */
 	class SpeciesMetaControl extends SpeciesMetaControlGen {
+		/**
+		 * Create and setup QTextBox txtDescription
+		 * @param string $strControlId optional ControlId to use
+		 * @return QTextBox
+		 */
+		public function txtDescription_Create($strControlId = null) {
+			$this->txtDescription = new QWriteBox($this->objParentObject, $strControlId);
+			$this->txtDescription->Name = QApplication::Translate('Description');
+			$this->txtDescription->Text = $this->objSpecies->Description;
+			$this->txtDescription->MaxLength = Species::DescriptionMaxLength;
+			return $this->txtDescription;
+		}
 	}
 ?>

@@ -7,6 +7,8 @@
 	<div id="formControls">
 		<?php $_CONTROL->lblIdcharacteristic->RenderWithName(); ?>
 
+		<?php $_CONTROL->lstSpeciesIdspeciesObject->RenderWithName(); ?>
+
 		<?php $_CONTROL->txtTitle->RenderWithName(); ?>
 
 		<?php $_CONTROL->txtDescription->RenderWithName(); ?>
@@ -14,8 +16,6 @@
 		<?php $_CONTROL->txtPicturesPath->RenderWithName(); ?>
 
 		<?php $_CONTROL->lstCharacteristicIdcharacteristicObject->RenderWithName(); ?>
-
-		<?php $_CONTROL->lstSpeciesIdspeciesObject->RenderWithName(); ?>
 
 		<?php $_CONTROL->txtIdentifier->RenderWithName(); ?>
 

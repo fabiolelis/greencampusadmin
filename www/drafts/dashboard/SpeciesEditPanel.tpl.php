@@ -9,6 +9,8 @@
 
 		<?php $_CONTROL->txtName->RenderWithName(); ?>
 
+		<?php $_CONTROL->txtIrishname->RenderWithName(); ?>
+
 		<?php $_CONTROL->txtLatinName->RenderWithName(); ?>
 
 		<?php $_CONTROL->txtDescription->RenderWithName(); ?>

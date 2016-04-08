@@ -22,6 +22,7 @@
 		// Controls for Species's Data Fields
 		public $lblIdspecies;
 		public $txtName;
+		public $txtIrishname;
 		public $txtLatinName;
 		public $txtDescription;
 
@@ -55,6 +56,7 @@
 			// Call MetaControl's methods to create qcontrols based on Species's data fields
 			$this->lblIdspecies = $this->mctSpecies->lblIdspecies_Create();
 			$this->txtName = $this->mctSpecies->txtName_Create();
+			$this->txtIrishname = $this->mctSpecies->txtIrishname_Create();
 			$this->txtLatinName = $this->mctSpecies->txtLatinName_Create();
 			$this->txtDescription = $this->mctSpecies->txtDescription_Create();
 

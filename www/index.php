@@ -37,8 +37,8 @@
 
 	<div id="titleBar">
 		<h2 id="right"><a href="<?php _p(__VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__) ?>/index.php">&laquo; <?php _t('Go to "Panel"'); ?></a></h2>
-		<h2><?php _t('Form') ?></h2>
-		<h1><?php _t('List of Form') ?></h1>
+		<h2><?php _t('Admin Portal') ?></h2>
+		<h1><?php _t('Green Campus ') ?></h1>
 	</div>
 
 	<div id="draftList">

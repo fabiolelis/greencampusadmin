@@ -66,11 +66,11 @@
 			// Create the Other Columns (note that you can use strings for characteristic's properties, or you
 			// can traverse down QQN::characteristic() to display fields that are down the hierarchy)
 			$this->dtgCharacteristics->MetaAddColumn('Idcharacteristic');
+			$this->dtgCharacteristics->MetaAddColumn(QQN::Characteristic()->SpeciesIdspeciesObject);
 			$this->dtgCharacteristics->MetaAddColumn('Title');
 			$this->dtgCharacteristics->MetaAddColumn('Description');
 			$this->dtgCharacteristics->MetaAddColumn('PicturesPath');
 			$this->dtgCharacteristics->MetaAddColumn(QQN::Characteristic()->CharacteristicIdcharacteristicObject);
-			$this->dtgCharacteristics->MetaAddColumn(QQN::Characteristic()->SpeciesIdspeciesObject);
 			$this->dtgCharacteristics->MetaAddColumn('Identifier');
 
 			// Setup the Create New button

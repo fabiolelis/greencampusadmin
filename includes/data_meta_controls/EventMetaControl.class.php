@@ -48,6 +48,16 @@
 			$this->calDateTime->Name = QApplication::Translate('Date Time');
 			$this->calDateTime->DateTime = $this->objEvent->DateTime;
 			$this->calDateTime->DateTimePickerType = QDateTimePickerType::DateTime;
+			$this->calDateTime->MinimumYear = 2016;
+			$this->calDateTime->MaximumYear = 2100;
+
+			if($strControlId == null){
+				$midnight_utc = new QDateTime('today midnight');
+
+				$this->calDateTime->DateTime = $midnight_utc;
+
+			}
+				
 			return $this->calDateTime;
 		}
 

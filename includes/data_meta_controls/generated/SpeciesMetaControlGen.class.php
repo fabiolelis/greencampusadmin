@@ -20,6 +20,8 @@
 	 * property-read QLabel $IdspeciesLabel
 	 * property QTextBox $NameControl
 	 * property-read QLabel $NameLabel
+	 * property QTextBox $IrishnameControl
+	 * property-read QLabel $IrishnameLabel
 	 * property QTextBox $LatinNameControl
 	 * property-read QLabel $LatinNameLabel
 	 * property QTextBox $DescriptionControl
@@ -68,6 +70,12 @@
 		protected $txtName;
 
         /**
+         * @var QTextBox txtIrishname;
+         * @access protected
+         */
+		protected $txtIrishname;
+
+        /**
          * @var QTextBox txtLatinName;
          * @access protected
          */
@@ -86,6 +94,12 @@
          * @access protected
          */
 		protected $lblName;
+
+        /**
+         * @var QLabel lblIrishname
+         * @access protected
+         */
+		protected $lblIrishname;
 
         /**
          * @var QLabel lblLatinName
@@ -240,6 +254,31 @@
 		}
 
 		/**
+		 * Create and setup QTextBox txtIrishname
+		 * @param string $strControlId optional ControlId to use
+		 * @return QTextBox
+		 */
+		public function txtIrishname_Create($strControlId = null) {
+			$this->txtIrishname = new QTextBox($this->objParentObject, $strControlId);
+			$this->txtIrishname->Name = QApplication::Translate('Irishname');
+			$this->txtIrishname->Text = $this->objSpecies->Irishname;
+			$this->txtIrishname->MaxLength = Species::IrishnameMaxLength;
+			return $this->txtIrishname;
+		}
+
+		/**
+		 * Create and setup QLabel lblIrishname
+		 * @param string $strControlId optional ControlId to use
+		 * @return QLabel
+		 */
+		public function lblIrishname_Create($strControlId = null) {
+			$this->lblIrishname = new QLabel($this->objParentObject, $strControlId);
+			$this->lblIrishname->Name = QApplication::Translate('Irishname');
+			$this->lblIrishname->Text = $this->objSpecies->Irishname;
+			return $this->lblIrishname;
+		}
+
+		/**
 		 * Create and setup QTextBox txtLatinName
 		 * @param string $strControlId optional ControlId to use
 		 * @return QTextBox
@@ -305,6 +344,9 @@
 			if ($this->txtName) $this->txtName->Text = $this->objSpecies->Name;
 			if ($this->lblName) $this->lblName->Text = $this->objSpecies->Name;
 
+			if ($this->txtIrishname) $this->txtIrishname->Text = $this->objSpecies->Irishname;
+			if ($this->lblIrishname) $this->lblIrishname->Text = $this->objSpecies->Irishname;
+
 			if ($this->txtLatinName) $this->txtLatinName->Text = $this->objSpecies->LatinName;
 			if ($this->lblLatinName) $this->lblLatinName->Text = $this->objSpecies->LatinName;
 
@@ -335,6 +377,7 @@
 			try {
 				// Update any fields for controls that have been created
 				if ($this->txtName) $this->objSpecies->Name = $this->txtName->Text;
+				if ($this->txtIrishname) $this->objSpecies->Irishname = $this->txtIrishname->Text;
 				if ($this->txtLatinName) $this->objSpecies->LatinName = $this->txtLatinName->Text;
 				if ($this->txtDescription) $this->objSpecies->Description = $this->txtDescription->Text;
 
@@ -391,6 +434,12 @@
 				case 'NameLabel':
 					if (!$this->lblName) return $this->lblName_Create();
 					return $this->lblName;
+				case 'IrishnameControl':
+					if (!$this->txtIrishname) return $this->txtIrishname_Create();
+					return $this->txtIrishname;
+				case 'IrishnameLabel':
+					if (!$this->lblIrishname) return $this->lblIrishname_Create();
+					return $this->lblIrishname;
 				case 'LatinNameControl':
 					if (!$this->txtLatinName) return $this->txtLatinName_Create();
 					return $this->txtLatinName;
@@ -429,6 +478,8 @@
 						return ($this->lblIdspecies = QType::Cast($mixValue, 'QControl'));
 					case 'NameControl':
 						return ($this->txtName = QType::Cast($mixValue, 'QControl'));
+					case 'IrishnameControl':
+						return ($this->txtIrishname = QType::Cast($mixValue, 'QControl'));
 					case 'LatinNameControl':
 						return ($this->txtLatinName = QType::Cast($mixValue, 'QControl'));
 					case 'DescriptionControl':

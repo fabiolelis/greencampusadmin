@@ -14,7 +14,7 @@
 	<div id="titleBar">
 		<h2 id="right"><a href="<?php _p(__VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__) ?>/index.php">&laquo; <?php _t('Go to "Form"'); ?></a></h2>
 		<h2><?php _t('List All'); ?></h2>
-		<h1><?php _t('Specieses'); ?></h1>
+		<h1><?php _t('Species'); ?></h1>
 	</div>
 
 	<?php $this->dtgSpecieses->Render(); ?>

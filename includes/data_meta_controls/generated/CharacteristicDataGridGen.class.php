@@ -294,13 +294,13 @@
 					throw new QCallerException('Content QQNode has a root table of "' . $mixContent->_RootTableName . '". Must be a root of "characteristic".');
 			} else if (is_string($mixContent)) switch ($mixContent) {
 				case 'Idcharacteristic': return QQN::Characteristic()->Idcharacteristic;
+				case 'SpeciesIdspecies': return QQN::Characteristic()->SpeciesIdspecies;
+				case 'SpeciesIdspeciesObject': return QQN::Characteristic()->SpeciesIdspeciesObject;
 				case 'Title': return QQN::Characteristic()->Title;
 				case 'Description': return QQN::Characteristic()->Description;
 				case 'PicturesPath': return QQN::Characteristic()->PicturesPath;
 				case 'CharacteristicIdcharacteristic': return QQN::Characteristic()->CharacteristicIdcharacteristic;
 				case 'CharacteristicIdcharacteristicObject': return QQN::Characteristic()->CharacteristicIdcharacteristicObject;
-				case 'SpeciesIdspecies': return QQN::Characteristic()->SpeciesIdspecies;
-				case 'SpeciesIdspeciesObject': return QQN::Characteristic()->SpeciesIdspeciesObject;
 				case 'Identifier': return QQN::Characteristic()->Identifier;
 				default: throw new QCallerException('Simple Property not found in CharacteristicDataGrid content: ' . $mixContent);
 			} else if ($mixContent instanceof QQAssociationNode)

@@ -67,6 +67,7 @@
 			// can traverse down QQN::species() to display fields that are down the hierarchy)
 			$this->dtgSpecieses->MetaAddColumn('Idspecies');
 			$this->dtgSpecieses->MetaAddColumn('Name');
+			$this->dtgSpecieses->MetaAddColumn('Irishname');
 			$this->dtgSpecieses->MetaAddColumn('LatinName');
 			$this->dtgSpecieses->MetaAddColumn('Description');
 
