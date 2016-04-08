@@ -31,14 +31,14 @@
 	// Sort the list of objects
 	ksort($strObjectArray);
 
-	$strPageTitle = QApplication::Translate('List of Form');
+	$strPageTitle = QApplication::Translate('List');
 	require(__INCLUDES__ . '/header.inc.php');
 ?>
 
 	<div id="titleBar">
 		<h2 id="right"><a href="<?php _p(__VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__) ?>/index.php">&laquo; <?php _t('Go to "Panel"'); ?></a></h2>
-		<h2><?php _t('Form Drafts') ?></h2>
-		<h1><?php _t('List of Form Drafts') ?></h1>
+		<h2><?php _t('Form') ?></h2>
+		<h1><?php _t('List of Form') ?></h1>
 	</div>
 
 	<div id="draftList">

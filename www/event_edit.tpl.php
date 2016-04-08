@@ -17,7 +17,6 @@
 	</div>
 
 	<div id="formControls">
-		<?php $this->lblIdevent->RenderWithName(); ?>
 
 		<?php $this->calDateTime->RenderWithName(); ?>
 

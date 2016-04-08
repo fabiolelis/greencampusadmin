@@ -27,6 +27,8 @@
 
 		<?php $this->txtAge->RenderWithName(); ?>
 
+		<?php $this->txtIdentifier->RenderWithName(); ?>
+
 	</div>
 
 	<div id="formActions">

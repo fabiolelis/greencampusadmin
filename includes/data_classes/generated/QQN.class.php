@@ -19,12 +19,6 @@
 			return new QQNodeSpecies('species', null, null);
 		}
 		/**
-		 * @return QQNodeSpeciesHasCharacteristic
-		 */
-		static public function SpeciesHasCharacteristic() {
-			return new QQNodeSpeciesHasCharacteristic('species_has_characteristic', null, null);
-		}
-		/**
 		 * @return QQNodeTree
 		 */
 		static public function Tree() {

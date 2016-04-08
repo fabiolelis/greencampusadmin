@@ -17,7 +17,6 @@
 	</div>
 
 	<div id="formControls">
-		<?php $this->lblIdtree->RenderWithName(); ?>
 
 		<?php $this->lstSpeciesIdspeciesObject->RenderWithName(); ?>
 
@@ -26,6 +25,8 @@
 		<?php $this->txtLatitude->RenderWithName(); ?>
 
 		<?php $this->txtAge->RenderWithName(); ?>
+
+		<?php $this->txtIdentifier->RenderWithName(); ?>
 
 	</div>
 

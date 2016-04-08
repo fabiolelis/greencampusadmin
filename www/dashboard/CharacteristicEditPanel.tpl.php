@@ -15,6 +15,10 @@
 
 		<?php $_CONTROL->lstCharacteristicIdcharacteristicObject->RenderWithName(); ?>
 
+		<?php $_CONTROL->lstSpeciesIdspeciesObject->RenderWithName(); ?>
+
+		<?php $_CONTROL->txtIdentifier->RenderWithName(); ?>
+
 	</div>
 
 	<div id="formActions">

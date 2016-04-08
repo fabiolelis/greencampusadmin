@@ -66,10 +66,11 @@
 			// Create the Other Columns (note that you can use strings for tree's properties, or you
 			// can traverse down QQN::tree() to display fields that are down the hierarchy)
 			$this->dtgTrees->MetaAddColumn('Idtree');
-			$this->dtgTrees->MetaAddColumn(QQN::Tree()->SpeciesIdspeciesObject->Name);
+			$this->dtgTrees->MetaAddColumn(QQN::Tree()->SpeciesIdspeciesObject);
 			$this->dtgTrees->MetaAddColumn('Longitude');
 			$this->dtgTrees->MetaAddColumn('Latitude');
 			$this->dtgTrees->MetaAddColumn('Age');
+			$this->dtgTrees->MetaAddColumn('Identifier');
 
 			// Setup the Create New button
 			$this->btnCreateNew = new QButton($this);

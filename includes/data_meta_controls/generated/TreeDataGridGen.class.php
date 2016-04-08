@@ -299,6 +299,7 @@
 				case 'Longitude': return QQN::Tree()->Longitude;
 				case 'Latitude': return QQN::Tree()->Latitude;
 				case 'Age': return QQN::Tree()->Age;
+				case 'Identifier': return QQN::Tree()->Identifier;
 				default: throw new QCallerException('Simple Property not found in TreeDataGrid content: ' . $mixContent);
 			} else if ($mixContent instanceof QQAssociationNode)
 				throw new QCallerException('Content QQNode cannot go through any "To Many" association nodes.');

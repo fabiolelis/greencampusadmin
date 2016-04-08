@@ -187,7 +187,7 @@
 		 */
 		public function lstSpeciesIdspeciesObject_Create($strControlId = null, QQCondition $objCondition = null, $objOptionalClauses = null) {
 			$this->lstSpeciesIdspeciesObject = new QListBox($this->objParentObject, $strControlId);
-			$this->lstSpeciesIdspeciesObject->Name = QApplication::Translate('Species');
+			$this->lstSpeciesIdspeciesObject->Name = QApplication::Translate('Species Idspecies Object');
 			$this->lstSpeciesIdspeciesObject->Required = true;
 			if (!$this->blnEditMode)
 				$this->lstSpeciesIdspeciesObject->AddItem(QApplication::Translate('- Select One -'), null);
@@ -198,7 +198,7 @@
 
 			// Iterate through the Cursor
 			while ($objSpeciesIdspeciesObject = Species::InstantiateCursor($objSpeciesIdspeciesObjectCursor)) {
-				$objListItem = new QListItem($objSpeciesIdspeciesObject->Name, $objSpeciesIdspeciesObject->Idspecies);
+				$objListItem = new QListItem($objSpeciesIdspeciesObject->__toString(), $objSpeciesIdspeciesObject->Idspecies);
 				if (($this->objSpeciesHasCharacteristic->SpeciesIdspeciesObject) && ($this->objSpeciesHasCharacteristic->SpeciesIdspeciesObject->Idspecies == $objSpeciesIdspeciesObject->Idspecies))
 					$objListItem->Selected = true;
 				$this->lstSpeciesIdspeciesObject->AddItem($objListItem);
@@ -230,7 +230,7 @@
 		 */
 		public function lstCharacteristicIdcharacteristicObject_Create($strControlId = null, QQCondition $objCondition = null, $objOptionalClauses = null) {
 			$this->lstCharacteristicIdcharacteristicObject = new QListBox($this->objParentObject, $strControlId);
-			$this->lstCharacteristicIdcharacteristicObject->Name = QApplication::Translate('Characteristic');
+			$this->lstCharacteristicIdcharacteristicObject->Name = QApplication::Translate('Characteristic Idcharacteristic Object');
 			$this->lstCharacteristicIdcharacteristicObject->Required = true;
 			if (!$this->blnEditMode)
 				$this->lstCharacteristicIdcharacteristicObject->AddItem(QApplication::Translate('- Select One -'), null);
@@ -241,7 +241,7 @@
 
 			// Iterate through the Cursor
 			while ($objCharacteristicIdcharacteristicObject = Characteristic::InstantiateCursor($objCharacteristicIdcharacteristicObjectCursor)) {
-				$objListItem = new QListItem($objCharacteristicIdcharacteristicObject->Title, $objCharacteristicIdcharacteristicObject->Idcharacteristic);
+				$objListItem = new QListItem($objCharacteristicIdcharacteristicObject->__toString(), $objCharacteristicIdcharacteristicObject->Idcharacteristic);
 				if (($this->objSpeciesHasCharacteristic->CharacteristicIdcharacteristicObject) && ($this->objSpeciesHasCharacteristic->CharacteristicIdcharacteristicObject->Idcharacteristic == $objCharacteristicIdcharacteristicObject->Idcharacteristic))
 					$objListItem->Selected = true;
 				$this->lstCharacteristicIdcharacteristicObject->AddItem($objListItem);
@@ -258,7 +258,7 @@
 		 */
 		public function lblCharacteristicIdcharacteristic_Create($strControlId = null) {
 			$this->lblCharacteristicIdcharacteristic = new QLabel($this->objParentObject, $strControlId);
-			$this->lblCharacteristicIdcharacteristic->Name = QApplication::Translate('Characteristic');
+			$this->lblCharacteristicIdcharacteristic->Name = QApplication::Translate('Characteristic Idcharacteristic Object');
 			$this->lblCharacteristicIdcharacteristic->Text = ($this->objSpeciesHasCharacteristic->CharacteristicIdcharacteristicObject) ? $this->objSpeciesHasCharacteristic->CharacteristicIdcharacteristicObject->__toString() : null;
 			$this->lblCharacteristicIdcharacteristic->Required = true;
 			return $this->lblCharacteristicIdcharacteristic;

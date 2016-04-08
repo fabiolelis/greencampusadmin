@@ -17,7 +17,6 @@
 	</div>
 
 	<div id="formControls">
-		<?php $this->lblIdspecies->RenderWithName(); ?>
 
 		<?php $this->txtName->RenderWithName(); ?>
 

@@ -20,6 +20,7 @@
 	 * @property string $Longitude the value for strLongitude 
 	 * @property string $Latitude the value for strLatitude 
 	 * @property integer $Age the value for intAge 
+	 * @property string $Identifier the value for strIdentifier 
 	 * @property Species $SpeciesIdspeciesObject the value for the Species object referenced by intSpeciesIdspecies (Not Null)
 	 * @property boolean $__Restored whether or not this object was restored from the database (as opposed to created new)
 	 */
@@ -69,6 +70,15 @@
 		 */
 		protected $intAge;
 		const AgeDefault = null;
+
+
+		/**
+		 * Protected member variable that maps to the database column tree.identifier
+		 * @var string strIdentifier
+		 */
+		protected $strIdentifier;
+		const IdentifierMaxLength = 45;
+		const IdentifierDefault = null;
 
 
 		/**
@@ -418,6 +428,7 @@
 			$objBuilder->AddSelectItem($strTableName, 'longitude', $strAliasPrefix . 'longitude');
 			$objBuilder->AddSelectItem($strTableName, 'latitude', $strAliasPrefix . 'latitude');
 			$objBuilder->AddSelectItem($strTableName, 'age', $strAliasPrefix . 'age');
+			$objBuilder->AddSelectItem($strTableName, 'identifier', $strAliasPrefix . 'identifier');
 		}
 
 
@@ -459,6 +470,8 @@
 			$objToReturn->strLatitude = $objDbRow->GetColumn($strAliasName, 'VarChar');
 			$strAliasName = array_key_exists($strAliasPrefix . 'age', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'age'] : $strAliasPrefix . 'age';
 			$objToReturn->intAge = $objDbRow->GetColumn($strAliasName, 'Integer');
+			$strAliasName = array_key_exists($strAliasPrefix . 'identifier', $strColumnAliasArray) ? $strColumnAliasArray[$strAliasPrefix . 'identifier'] : $strAliasPrefix . 'identifier';
+			$objToReturn->strIdentifier = $objDbRow->GetColumn($strAliasName, 'VarChar');
 
 			// Instantiate Virtual Attributes
 			foreach ($objDbRow->GetColumnNameArray() as $strColumnName => $mixValue) {
@@ -632,12 +645,14 @@
 							`species_idspecies`,
 							`longitude`,
 							`latitude`,
-							`age`
+							`age`,
+							`identifier`
 						) VALUES (
 							' . $objDatabase->SqlVariable($this->intSpeciesIdspecies) . ',
 							' . $objDatabase->SqlVariable($this->strLongitude) . ',
 							' . $objDatabase->SqlVariable($this->strLatitude) . ',
-							' . $objDatabase->SqlVariable($this->intAge) . '
+							' . $objDatabase->SqlVariable($this->intAge) . ',
+							' . $objDatabase->SqlVariable($this->strIdentifier) . '
 						)
 					');
 
@@ -660,7 +675,8 @@
 							`species_idspecies` = ' . $objDatabase->SqlVariable($this->intSpeciesIdspecies) . ',
 							`longitude` = ' . $objDatabase->SqlVariable($this->strLongitude) . ',
 							`latitude` = ' . $objDatabase->SqlVariable($this->strLatitude) . ',
-							`age` = ' . $objDatabase->SqlVariable($this->intAge) . '
+							`age` = ' . $objDatabase->SqlVariable($this->intAge) . ',
+							`identifier` = ' . $objDatabase->SqlVariable($this->strIdentifier) . '
 						WHERE
 							`idtree` = ' . $objDatabase->SqlVariable($this->intIdtree) . '
 					');
@@ -749,6 +765,7 @@
 			$this->strLongitude = $objReloaded->strLongitude;
 			$this->strLatitude = $objReloaded->strLatitude;
 			$this->intAge = $objReloaded->intAge;
+			$this->strIdentifier = $objReloaded->strIdentifier;
 		}
 
 		/**
@@ -766,6 +783,7 @@
 					`longitude`,
 					`latitude`,
 					`age`,
+					`identifier`,
 					__sys_login_id,
 					__sys_action,
 					__sys_date
@@ -775,6 +793,7 @@
 					' . $objDatabase->SqlVariable($this->strLongitude) . ',
 					' . $objDatabase->SqlVariable($this->strLatitude) . ',
 					' . $objDatabase->SqlVariable($this->intAge) . ',
+					' . $objDatabase->SqlVariable($this->strIdentifier) . ',
 					' . (($objDatabase->JournaledById) ? $objDatabase->JournaledById : 'NULL') . ',
 					' . $objDatabase->SqlVariable($strJournalCommand) . ',
 					NOW()
@@ -849,6 +868,11 @@
 					// Gets the value for intAge 
 					// @return integer
 					return $this->intAge;
+
+				case 'Identifier':
+					// Gets the value for strIdentifier 
+					// @return string
+					return $this->strIdentifier;
 
 
 				///////////////////
@@ -944,6 +968,17 @@
 						throw $objExc;
 					}
 
+				case 'Identifier':
+					// Sets the value for strIdentifier 
+					// @param string $mixValue
+					// @return string
+					try {
+						return ($this->strIdentifier = QType::Cast($mixValue, QType::String));
+					} catch (QCallerException $objExc) {
+						$objExc->IncrementOffset();
+						throw $objExc;
+					}
+
 
 				///////////////////
 				// Member Objects
@@ -1020,6 +1055,7 @@
 			$strToReturn .= '<element name="Longitude" type="xsd:string"/>';
 			$strToReturn .= '<element name="Latitude" type="xsd:string"/>';
 			$strToReturn .= '<element name="Age" type="xsd:int"/>';
+			$strToReturn .= '<element name="Identifier" type="xsd:string"/>';
 			$strToReturn .= '<element name="__blnRestored" type="xsd:boolean"/>';
 			$strToReturn .= '</sequence></complexType>';
 			return $strToReturn;
@@ -1054,6 +1090,8 @@
 				$objToReturn->strLatitude = $objSoapObject->Latitude;
 			if (property_exists($objSoapObject, 'Age'))
 				$objToReturn->intAge = $objSoapObject->Age;
+			if (property_exists($objSoapObject, 'Identifier'))
+				$objToReturn->strIdentifier = $objSoapObject->Identifier;
 			if (property_exists($objSoapObject, '__blnRestored'))
 				$objToReturn->__blnRestored = $objSoapObject->__blnRestored;
 			return $objToReturn;
@@ -1097,6 +1135,7 @@
 	 * @property-read QQNode $Longitude
 	 * @property-read QQNode $Latitude
 	 * @property-read QQNode $Age
+	 * @property-read QQNode $Identifier
 	 */
 	class QQNodeTree extends QQNode {
 		protected $strTableName = 'tree';
@@ -1116,6 +1155,8 @@
 					return new QQNode('latitude', 'Latitude', 'string', $this);
 				case 'Age':
 					return new QQNode('age', 'Age', 'integer', $this);
+				case 'Identifier':
+					return new QQNode('identifier', 'Identifier', 'string', $this);
 
 				case '_PrimaryKeyNode':
 					return new QQNode('idtree', 'Idtree', 'integer', $this);
@@ -1137,6 +1178,7 @@
 	 * @property-read QQNode $Longitude
 	 * @property-read QQNode $Latitude
 	 * @property-read QQNode $Age
+	 * @property-read QQNode $Identifier
 	 * @property-read QQNode $_PrimaryKeyNode
 	 */
 	class QQReverseReferenceNodeTree extends QQReverseReferenceNode {
@@ -1157,6 +1199,8 @@
 					return new QQNode('latitude', 'Latitude', 'string', $this);
 				case 'Age':
 					return new QQNode('age', 'Age', 'integer', $this);
+				case 'Identifier':
+					return new QQNode('identifier', 'Identifier', 'string', $this);
 
 				case '_PrimaryKeyNode':
 					return new QQNode('idtree', 'Idtree', 'integer', $this);

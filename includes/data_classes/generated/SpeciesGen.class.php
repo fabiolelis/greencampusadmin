@@ -19,8 +19,8 @@
 	 * @property string $Name the value for strName (Not Null)
 	 * @property string $LatinName the value for strLatinName 
 	 * @property string $Description the value for strDescription 
-	 * @property SpeciesHasCharacteristic $_SpeciesHasCharacteristicAsId the value for the private _objSpeciesHasCharacteristicAsId (Read-Only) if set due to an expansion on the species_has_characteristic.species_idspecies reverse relationship
-	 * @property SpeciesHasCharacteristic[] $_SpeciesHasCharacteristicAsIdArray the value for the private _objSpeciesHasCharacteristicAsIdArray (Read-Only) if set due to an ExpandAsArray on the species_has_characteristic.species_idspecies reverse relationship
+	 * @property Characteristic $_CharacteristicAsId the value for the private _objCharacteristicAsId (Read-Only) if set due to an expansion on the characteristic.species_idspecies reverse relationship
+	 * @property Characteristic[] $_CharacteristicAsIdArray the value for the private _objCharacteristicAsIdArray (Read-Only) if set due to an ExpandAsArray on the characteristic.species_idspecies reverse relationship
 	 * @property Tree $_TreeAsId the value for the private _objTreeAsId (Read-Only) if set due to an expansion on the tree.species_idspecies reverse relationship
 	 * @property Tree[] $_TreeAsIdArray the value for the private _objTreeAsIdArray (Read-Only) if set due to an ExpandAsArray on the tree.species_idspecies reverse relationship
 	 * @property boolean $__Restored whether or not this object was restored from the database (as opposed to created new)
@@ -67,20 +67,20 @@
 
 
 		/**
-		 * Private member variable that stores a reference to a single SpeciesHasCharacteristicAsId object
-		 * (of type SpeciesHasCharacteristic), if this Species object was restored with
-		 * an expansion on the species_has_characteristic association table.
-		 * @var SpeciesHasCharacteristic _objSpeciesHasCharacteristicAsId;
+		 * Private member variable that stores a reference to a single CharacteristicAsId object
+		 * (of type Characteristic), if this Species object was restored with
+		 * an expansion on the characteristic association table.
+		 * @var Characteristic _objCharacteristicAsId;
 		 */
-		private $_objSpeciesHasCharacteristicAsId;
+		private $_objCharacteristicAsId;
 
 		/**
-		 * Private member variable that stores a reference to an array of SpeciesHasCharacteristicAsId objects
-		 * (of type SpeciesHasCharacteristic[]), if this Species object was restored with
-		 * an ExpandAsArray on the species_has_characteristic association table.
-		 * @var SpeciesHasCharacteristic[] _objSpeciesHasCharacteristicAsIdArray;
+		 * Private member variable that stores a reference to an array of CharacteristicAsId objects
+		 * (of type Characteristic[]), if this Species object was restored with
+		 * an ExpandAsArray on the characteristic association table.
+		 * @var Characteristic[] _objCharacteristicAsIdArray;
 		 */
-		private $_objSpeciesHasCharacteristicAsIdArray = array();
+		private $_objCharacteristicAsIdArray = array();
 
 		/**
 		 * Private member variable that stores a reference to a single TreeAsId object
@@ -472,17 +472,17 @@
 					$strAliasPrefix = 'species__';
 
 
-				$strAlias = $strAliasPrefix . 'specieshascharacteristicasid__species_idspecies';
+				$strAlias = $strAliasPrefix . 'characteristicasid__idcharacteristic';
 				$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 				if ((array_key_exists($strAlias, $strExpandAsArrayNodes)) &&
 					(!is_null($objDbRow->GetColumn($strAliasName)))) {
-					if ($intPreviousChildItemCount = count($objPreviousItem->_objSpeciesHasCharacteristicAsIdArray)) {
-						$objPreviousChildItem = $objPreviousItem->_objSpeciesHasCharacteristicAsIdArray[$intPreviousChildItemCount - 1];
-						$objChildItem = SpeciesHasCharacteristic::InstantiateDbRow($objDbRow, $strAliasPrefix . 'specieshascharacteristicasid__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
+					if ($intPreviousChildItemCount = count($objPreviousItem->_objCharacteristicAsIdArray)) {
+						$objPreviousChildItem = $objPreviousItem->_objCharacteristicAsIdArray[$intPreviousChildItemCount - 1];
+						$objChildItem = Characteristic::InstantiateDbRow($objDbRow, $strAliasPrefix . 'characteristicasid__', $strExpandAsArrayNodes, $objPreviousChildItem, $strColumnAliasArray);
 						if ($objChildItem)
-							$objPreviousItem->_objSpeciesHasCharacteristicAsIdArray[] = $objChildItem;
+							$objPreviousItem->_objCharacteristicAsIdArray[] = $objChildItem;
 					} else
-						$objPreviousItem->_objSpeciesHasCharacteristicAsIdArray[] = SpeciesHasCharacteristic::InstantiateDbRow($objDbRow, $strAliasPrefix . 'specieshascharacteristicasid__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+						$objPreviousItem->_objCharacteristicAsIdArray[] = Characteristic::InstantiateDbRow($objDbRow, $strAliasPrefix . 'characteristicasid__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 					$blnExpandedViaArray = true;
 				}
 
@@ -535,14 +535,14 @@
 
 
 
-			// Check for SpeciesHasCharacteristicAsId Virtual Binding
-			$strAlias = $strAliasPrefix . 'specieshascharacteristicasid__species_idspecies';
+			// Check for CharacteristicAsId Virtual Binding
+			$strAlias = $strAliasPrefix . 'characteristicasid__idcharacteristic';
 			$strAliasName = array_key_exists($strAlias, $strColumnAliasArray) ? $strColumnAliasArray[$strAlias] : $strAlias;
 			if (!is_null($objDbRow->GetColumn($strAliasName))) {
 				if (($strExpandAsArrayNodes) && (array_key_exists($strAlias, $strExpandAsArrayNodes)))
-					$objToReturn->_objSpeciesHasCharacteristicAsIdArray[] = SpeciesHasCharacteristic::InstantiateDbRow($objDbRow, $strAliasPrefix . 'specieshascharacteristicasid__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$objToReturn->_objCharacteristicAsIdArray[] = Characteristic::InstantiateDbRow($objDbRow, $strAliasPrefix . 'characteristicasid__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 				else
-					$objToReturn->_objSpeciesHasCharacteristicAsId = SpeciesHasCharacteristic::InstantiateDbRow($objDbRow, $strAliasPrefix . 'specieshascharacteristicasid__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
+					$objToReturn->_objCharacteristicAsId = Characteristic::InstantiateDbRow($objDbRow, $strAliasPrefix . 'characteristicasid__', $strExpandAsArrayNodes, null, $strColumnAliasArray);
 			}
 
 			// Check for TreeAsId Virtual Binding
@@ -889,17 +889,17 @@
 				// (If restored via a "Many-to" expansion)
 				////////////////////////////
 
-				case '_SpeciesHasCharacteristicAsId':
-					// Gets the value for the private _objSpeciesHasCharacteristicAsId (Read-Only)
-					// if set due to an expansion on the species_has_characteristic.species_idspecies reverse relationship
-					// @return SpeciesHasCharacteristic
-					return $this->_objSpeciesHasCharacteristicAsId;
+				case '_CharacteristicAsId':
+					// Gets the value for the private _objCharacteristicAsId (Read-Only)
+					// if set due to an expansion on the characteristic.species_idspecies reverse relationship
+					// @return Characteristic
+					return $this->_objCharacteristicAsId;
 
-				case '_SpeciesHasCharacteristicAsIdArray':
-					// Gets the value for the private _objSpeciesHasCharacteristicAsIdArray (Read-Only)
-					// if set due to an ExpandAsArray on the species_has_characteristic.species_idspecies reverse relationship
-					// @return SpeciesHasCharacteristic[]
-					return (array) $this->_objSpeciesHasCharacteristicAsIdArray;
+				case '_CharacteristicAsIdArray':
+					// Gets the value for the private _objCharacteristicAsIdArray (Read-Only)
+					// if set due to an ExpandAsArray on the characteristic.species_idspecies reverse relationship
+					// @return Characteristic[]
+					return (array) $this->_objCharacteristicAsIdArray;
 
 				case '_TreeAsId':
 					// Gets the value for the private _objTreeAsId (Read-Only)
@@ -1006,20 +1006,20 @@
 
 			
 		
-		// Related Objects' Methods for SpeciesHasCharacteristicAsId
+		// Related Objects' Methods for CharacteristicAsId
 		//-------------------------------------------------------------------
 
 		/**
-		 * Gets all associated SpeciesHasCharacteristicsAsId as an array of SpeciesHasCharacteristic objects
+		 * Gets all associated CharacteristicsAsId as an array of Characteristic objects
 		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
-		 * @return SpeciesHasCharacteristic[]
+		 * @return Characteristic[]
 		*/ 
-		public function GetSpeciesHasCharacteristicAsIdArray($objOptionalClauses = null) {
+		public function GetCharacteristicAsIdArray($objOptionalClauses = null) {
 			if ((is_null($this->intIdspecies)))
 				return array();
 
 			try {
-				return SpeciesHasCharacteristic::LoadArrayBySpeciesIdspecies($this->intIdspecies, $objOptionalClauses);
+				return Characteristic::LoadArrayBySpeciesIdspecies($this->intIdspecies, $objOptionalClauses);
 			} catch (QCallerException $objExc) {
 				$objExc->IncrementOffset();
 				throw $objExc;
@@ -1027,26 +1027,26 @@
 		}
 
 		/**
-		 * Counts all associated SpeciesHasCharacteristicsAsId
+		 * Counts all associated CharacteristicsAsId
 		 * @return int
 		*/ 
-		public function CountSpeciesHasCharacteristicsAsId() {
+		public function CountCharacteristicsAsId() {
 			if ((is_null($this->intIdspecies)))
 				return 0;
 
-			return SpeciesHasCharacteristic::CountBySpeciesIdspecies($this->intIdspecies);
+			return Characteristic::CountBySpeciesIdspecies($this->intIdspecies);
 		}
 
 		/**
-		 * Associates a SpeciesHasCharacteristicAsId
-		 * @param SpeciesHasCharacteristic $objSpeciesHasCharacteristic
+		 * Associates a CharacteristicAsId
+		 * @param Characteristic $objCharacteristic
 		 * @return void
 		*/ 
-		public function AssociateSpeciesHasCharacteristicAsId(SpeciesHasCharacteristic $objSpeciesHasCharacteristic) {
+		public function AssociateCharacteristicAsId(Characteristic $objCharacteristic) {
 			if ((is_null($this->intIdspecies)))
-				throw new QUndefinedPrimaryKeyException('Unable to call AssociateSpeciesHasCharacteristicAsId on this unsaved Species.');
-			if ((is_null($objSpeciesHasCharacteristic->SpeciesIdspecies)) || (is_null($objSpeciesHasCharacteristic->CharacteristicIdcharacteristic)))
-				throw new QUndefinedPrimaryKeyException('Unable to call AssociateSpeciesHasCharacteristicAsId on this Species with an unsaved SpeciesHasCharacteristic.');
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateCharacteristicAsId on this unsaved Species.');
+			if ((is_null($objCharacteristic->Idcharacteristic)))
+				throw new QUndefinedPrimaryKeyException('Unable to call AssociateCharacteristicAsId on this Species with an unsaved Characteristic.');
 
 			// Get the Database Object for this Class
 			$objDatabase = Species::GetDatabase();
@@ -1054,31 +1054,30 @@
 			// Perform the SQL Query
 			$objDatabase->NonQuery('
 				UPDATE
-					`species_has_characteristic`
+					`characteristic`
 				SET
 					`species_idspecies` = ' . $objDatabase->SqlVariable($this->intIdspecies) . '
 				WHERE
-					`species_idspecies` = ' . $objDatabase->SqlVariable($objSpeciesHasCharacteristic->SpeciesIdspecies) . ' AND
-					`characteristic_idcharacteristic` = ' . $objDatabase->SqlVariable($objSpeciesHasCharacteristic->CharacteristicIdcharacteristic) . '
+					`idcharacteristic` = ' . $objDatabase->SqlVariable($objCharacteristic->Idcharacteristic) . '
 			');
 
 			// Journaling (if applicable)
 			if ($objDatabase->JournalingDatabase) {
-				$objSpeciesHasCharacteristic->SpeciesIdspecies = $this->intIdspecies;
-				$objSpeciesHasCharacteristic->Journal('UPDATE');
+				$objCharacteristic->SpeciesIdspecies = $this->intIdspecies;
+				$objCharacteristic->Journal('UPDATE');
 			}
 		}
 
 		/**
-		 * Unassociates a SpeciesHasCharacteristicAsId
-		 * @param SpeciesHasCharacteristic $objSpeciesHasCharacteristic
+		 * Unassociates a CharacteristicAsId
+		 * @param Characteristic $objCharacteristic
 		 * @return void
 		*/ 
-		public function UnassociateSpeciesHasCharacteristicAsId(SpeciesHasCharacteristic $objSpeciesHasCharacteristic) {
+		public function UnassociateCharacteristicAsId(Characteristic $objCharacteristic) {
 			if ((is_null($this->intIdspecies)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSpeciesHasCharacteristicAsId on this unsaved Species.');
-			if ((is_null($objSpeciesHasCharacteristic->SpeciesIdspecies)) || (is_null($objSpeciesHasCharacteristic->CharacteristicIdcharacteristic)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSpeciesHasCharacteristicAsId on this Species with an unsaved SpeciesHasCharacteristic.');
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateCharacteristicAsId on this unsaved Species.');
+			if ((is_null($objCharacteristic->Idcharacteristic)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateCharacteristicAsId on this Species with an unsaved Characteristic.');
 
 			// Get the Database Object for this Class
 			$objDatabase = Species::GetDatabase();
@@ -1086,45 +1085,44 @@
 			// Perform the SQL Query
 			$objDatabase->NonQuery('
 				UPDATE
-					`species_has_characteristic`
+					`characteristic`
 				SET
 					`species_idspecies` = null
 				WHERE
-					`species_idspecies` = ' . $objDatabase->SqlVariable($objSpeciesHasCharacteristic->SpeciesIdspecies) . ' AND
-					`characteristic_idcharacteristic` = ' . $objDatabase->SqlVariable($objSpeciesHasCharacteristic->CharacteristicIdcharacteristic) . ' AND
+					`idcharacteristic` = ' . $objDatabase->SqlVariable($objCharacteristic->Idcharacteristic) . ' AND
 					`species_idspecies` = ' . $objDatabase->SqlVariable($this->intIdspecies) . '
 			');
 
 			// Journaling
 			if ($objDatabase->JournalingDatabase) {
-				$objSpeciesHasCharacteristic->SpeciesIdspecies = null;
-				$objSpeciesHasCharacteristic->Journal('UPDATE');
+				$objCharacteristic->SpeciesIdspecies = null;
+				$objCharacteristic->Journal('UPDATE');
 			}
 		}
 
 		/**
-		 * Unassociates all SpeciesHasCharacteristicsAsId
+		 * Unassociates all CharacteristicsAsId
 		 * @return void
 		*/ 
-		public function UnassociateAllSpeciesHasCharacteristicsAsId() {
+		public function UnassociateAllCharacteristicsAsId() {
 			if ((is_null($this->intIdspecies)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSpeciesHasCharacteristicAsId on this unsaved Species.');
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateCharacteristicAsId on this unsaved Species.');
 
 			// Get the Database Object for this Class
 			$objDatabase = Species::GetDatabase();
 
 			// Journaling
 			if ($objDatabase->JournalingDatabase) {
-				foreach (SpeciesHasCharacteristic::LoadArrayBySpeciesIdspecies($this->intIdspecies) as $objSpeciesHasCharacteristic) {
-					$objSpeciesHasCharacteristic->SpeciesIdspecies = null;
-					$objSpeciesHasCharacteristic->Journal('UPDATE');
+				foreach (Characteristic::LoadArrayBySpeciesIdspecies($this->intIdspecies) as $objCharacteristic) {
+					$objCharacteristic->SpeciesIdspecies = null;
+					$objCharacteristic->Journal('UPDATE');
 				}
 			}
 
 			// Perform the SQL Query
 			$objDatabase->NonQuery('
 				UPDATE
-					`species_has_characteristic`
+					`characteristic`
 				SET
 					`species_idspecies` = null
 				WHERE
@@ -1133,15 +1131,15 @@
 		}
 
 		/**
-		 * Deletes an associated SpeciesHasCharacteristicAsId
-		 * @param SpeciesHasCharacteristic $objSpeciesHasCharacteristic
+		 * Deletes an associated CharacteristicAsId
+		 * @param Characteristic $objCharacteristic
 		 * @return void
 		*/ 
-		public function DeleteAssociatedSpeciesHasCharacteristicAsId(SpeciesHasCharacteristic $objSpeciesHasCharacteristic) {
+		public function DeleteAssociatedCharacteristicAsId(Characteristic $objCharacteristic) {
 			if ((is_null($this->intIdspecies)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSpeciesHasCharacteristicAsId on this unsaved Species.');
-			if ((is_null($objSpeciesHasCharacteristic->SpeciesIdspecies)) || (is_null($objSpeciesHasCharacteristic->CharacteristicIdcharacteristic)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSpeciesHasCharacteristicAsId on this Species with an unsaved SpeciesHasCharacteristic.');
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateCharacteristicAsId on this unsaved Species.');
+			if ((is_null($objCharacteristic->Idcharacteristic)))
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateCharacteristicAsId on this Species with an unsaved Characteristic.');
 
 			// Get the Database Object for this Class
 			$objDatabase = Species::GetDatabase();
@@ -1149,41 +1147,40 @@
 			// Perform the SQL Query
 			$objDatabase->NonQuery('
 				DELETE FROM
-					`species_has_characteristic`
+					`characteristic`
 				WHERE
-					`species_idspecies` = ' . $objDatabase->SqlVariable($objSpeciesHasCharacteristic->SpeciesIdspecies) . ' AND
-					`characteristic_idcharacteristic` = ' . $objDatabase->SqlVariable($objSpeciesHasCharacteristic->CharacteristicIdcharacteristic) . ' AND
+					`idcharacteristic` = ' . $objDatabase->SqlVariable($objCharacteristic->Idcharacteristic) . ' AND
 					`species_idspecies` = ' . $objDatabase->SqlVariable($this->intIdspecies) . '
 			');
 
 			// Journaling
 			if ($objDatabase->JournalingDatabase) {
-				$objSpeciesHasCharacteristic->Journal('DELETE');
+				$objCharacteristic->Journal('DELETE');
 			}
 		}
 
 		/**
-		 * Deletes all associated SpeciesHasCharacteristicsAsId
+		 * Deletes all associated CharacteristicsAsId
 		 * @return void
 		*/ 
-		public function DeleteAllSpeciesHasCharacteristicsAsId() {
+		public function DeleteAllCharacteristicsAsId() {
 			if ((is_null($this->intIdspecies)))
-				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateSpeciesHasCharacteristicAsId on this unsaved Species.');
+				throw new QUndefinedPrimaryKeyException('Unable to call UnassociateCharacteristicAsId on this unsaved Species.');
 
 			// Get the Database Object for this Class
 			$objDatabase = Species::GetDatabase();
 
 			// Journaling
 			if ($objDatabase->JournalingDatabase) {
-				foreach (SpeciesHasCharacteristic::LoadArrayBySpeciesIdspecies($this->intIdspecies) as $objSpeciesHasCharacteristic) {
-					$objSpeciesHasCharacteristic->Journal('DELETE');
+				foreach (Characteristic::LoadArrayBySpeciesIdspecies($this->intIdspecies) as $objCharacteristic) {
+					$objCharacteristic->Journal('DELETE');
 				}
 			}
 
 			// Perform the SQL Query
 			$objDatabase->NonQuery('
 				DELETE FROM
-					`species_has_characteristic`
+					`characteristic`
 				WHERE
 					`species_idspecies` = ' . $objDatabase->SqlVariable($this->intIdspecies) . '
 			');
@@ -1452,7 +1449,7 @@
 	 * @property-read QQNode $Name
 	 * @property-read QQNode $LatinName
 	 * @property-read QQNode $Description
-	 * @property-read QQReverseReferenceNodeSpeciesHasCharacteristic $SpeciesHasCharacteristicAsId
+	 * @property-read QQReverseReferenceNodeCharacteristic $CharacteristicAsId
 	 * @property-read QQReverseReferenceNodeTree $TreeAsId
 	 */
 	class QQNodeSpecies extends QQNode {
@@ -1469,8 +1466,8 @@
 					return new QQNode('latin_name', 'LatinName', 'string', $this);
 				case 'Description':
 					return new QQNode('description', 'Description', 'string', $this);
-				case 'SpeciesHasCharacteristicAsId':
-					return new QQReverseReferenceNodeSpeciesHasCharacteristic($this, 'specieshascharacteristicasid', 'reverse_reference', 'species_idspecies');
+				case 'CharacteristicAsId':
+					return new QQReverseReferenceNodeCharacteristic($this, 'characteristicasid', 'reverse_reference', 'species_idspecies');
 				case 'TreeAsId':
 					return new QQReverseReferenceNodeTree($this, 'treeasid', 'reverse_reference', 'species_idspecies');
 
@@ -1492,7 +1489,7 @@
 	 * @property-read QQNode $Name
 	 * @property-read QQNode $LatinName
 	 * @property-read QQNode $Description
-	 * @property-read QQReverseReferenceNodeSpeciesHasCharacteristic $SpeciesHasCharacteristicAsId
+	 * @property-read QQReverseReferenceNodeCharacteristic $CharacteristicAsId
 	 * @property-read QQReverseReferenceNodeTree $TreeAsId
 	 * @property-read QQNode $_PrimaryKeyNode
 	 */
@@ -1510,8 +1507,8 @@
 					return new QQNode('latin_name', 'LatinName', 'string', $this);
 				case 'Description':
 					return new QQNode('description', 'Description', 'string', $this);
-				case 'SpeciesHasCharacteristicAsId':
-					return new QQReverseReferenceNodeSpeciesHasCharacteristic($this, 'specieshascharacteristicasid', 'reverse_reference', 'species_idspecies');
+				case 'CharacteristicAsId':
+					return new QQReverseReferenceNodeCharacteristic($this, 'characteristicasid', 'reverse_reference', 'species_idspecies');
 				case 'TreeAsId':
 					return new QQReverseReferenceNodeTree($this, 'treeasid', 'reverse_reference', 'species_idspecies');
 

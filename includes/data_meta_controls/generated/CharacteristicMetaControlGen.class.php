@@ -26,6 +26,10 @@
 	 * property-read QLabel $PicturesPathLabel
 	 * property QListBox $CharacteristicIdcharacteristicControl
 	 * property-read QLabel $CharacteristicIdcharacteristicLabel
+	 * property QListBox $SpeciesIdspeciesControl
+	 * property-read QLabel $SpeciesIdspeciesLabel
+	 * property QTextBox $IdentifierControl
+	 * property-read QLabel $IdentifierLabel
 	 * property-read string $TitleVerb a verb indicating whether or not this is being edited or created
 	 * property-read boolean $EditMode a boolean indicating whether or not this is being edited or created
 	 */
@@ -87,6 +91,18 @@
          */
 		protected $lstCharacteristicIdcharacteristicObject;
 
+        /**
+         * @var QListBox lstSpeciesIdspeciesObject;
+         * @access protected
+         */
+		protected $lstSpeciesIdspeciesObject;
+
+        /**
+         * @var QTextBox txtIdentifier;
+         * @access protected
+         */
+		protected $txtIdentifier;
+
 
 		// Controls that allow the viewing of Characteristic's individual data fields
         /**
@@ -112,6 +128,18 @@
          * @access protected
          */
 		protected $lblCharacteristicIdcharacteristic;
+
+        /**
+         * @var QLabel lblSpeciesIdspecies
+         * @access protected
+         */
+		protected $lblSpeciesIdspecies;
+
+        /**
+         * @var QLabel lblIdentifier
+         * @access protected
+         */
+		protected $lblIdentifier;
 
 
 		// QListBox Controls (if applicable) to edit Unique ReverseReferences and ManyToMany References
@@ -310,7 +338,7 @@
 		 */
 		public function lstCharacteristicIdcharacteristicObject_Create($strControlId = null, QQCondition $objCondition = null, $objOptionalClauses = null) {
 			$this->lstCharacteristicIdcharacteristicObject = new QListBox($this->objParentObject, $strControlId);
-			$this->lstCharacteristicIdcharacteristicObject->Name = QApplication::Translate('Parent characteristic');
+			$this->lstCharacteristicIdcharacteristicObject->Name = QApplication::Translate('Characteristic Idcharacteristic Object');
 			$this->lstCharacteristicIdcharacteristicObject->AddItem(QApplication::Translate('- Select One -'), null);
 
 			// Setup and perform the Query
@@ -319,7 +347,7 @@
 
 			// Iterate through the Cursor
 			while ($objCharacteristicIdcharacteristicObject = Characteristic::InstantiateCursor($objCharacteristicIdcharacteristicObjectCursor)) {
-				$objListItem = new QListItem($objCharacteristicIdcharacteristicObject->Title, $objCharacteristicIdcharacteristicObject->Idcharacteristic);
+				$objListItem = new QListItem($objCharacteristicIdcharacteristicObject->__toString(), $objCharacteristicIdcharacteristicObject->Idcharacteristic);
 				if (($this->objCharacteristic->CharacteristicIdcharacteristicObject) && ($this->objCharacteristic->CharacteristicIdcharacteristicObject->Idcharacteristic == $objCharacteristicIdcharacteristicObject->Idcharacteristic))
 					$objListItem->Selected = true;
 				$this->lstCharacteristicIdcharacteristicObject->AddItem($objListItem);
@@ -339,6 +367,74 @@
 			$this->lblCharacteristicIdcharacteristic->Name = QApplication::Translate('Characteristic Idcharacteristic Object');
 			$this->lblCharacteristicIdcharacteristic->Text = ($this->objCharacteristic->CharacteristicIdcharacteristicObject) ? $this->objCharacteristic->CharacteristicIdcharacteristicObject->__toString() : null;
 			return $this->lblCharacteristicIdcharacteristic;
+		}
+
+		/**
+		 * Create and setup QListBox lstSpeciesIdspeciesObject
+		 * @param string $strControlId optional ControlId to use
+		 * @param QQCondition $objConditions override the default condition of QQ::All() to the query, itself
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause object or array of QQClause objects for the query
+		 * @return QListBox
+		 */
+		public function lstSpeciesIdspeciesObject_Create($strControlId = null, QQCondition $objCondition = null, $objOptionalClauses = null) {
+			$this->lstSpeciesIdspeciesObject = new QListBox($this->objParentObject, $strControlId);
+			$this->lstSpeciesIdspeciesObject->Name = QApplication::Translate('Species Idspecies Object');
+			$this->lstSpeciesIdspeciesObject->Required = true;
+			if (!$this->blnEditMode)
+				$this->lstSpeciesIdspeciesObject->AddItem(QApplication::Translate('- Select One -'), null);
+
+			// Setup and perform the Query
+			if (is_null($objCondition)) $objCondition = QQ::All();
+			$objSpeciesIdspeciesObjectCursor = Species::QueryCursor($objCondition, $objOptionalClauses);
+
+			// Iterate through the Cursor
+			while ($objSpeciesIdspeciesObject = Species::InstantiateCursor($objSpeciesIdspeciesObjectCursor)) {
+				$objListItem = new QListItem($objSpeciesIdspeciesObject->__toString(), $objSpeciesIdspeciesObject->Idspecies);
+				if (($this->objCharacteristic->SpeciesIdspeciesObject) && ($this->objCharacteristic->SpeciesIdspeciesObject->Idspecies == $objSpeciesIdspeciesObject->Idspecies))
+					$objListItem->Selected = true;
+				$this->lstSpeciesIdspeciesObject->AddItem($objListItem);
+			}
+
+			// Return the QListBox
+			return $this->lstSpeciesIdspeciesObject;
+		}
+
+		/**
+		 * Create and setup QLabel lblSpeciesIdspecies
+		 * @param string $strControlId optional ControlId to use
+		 * @return QLabel
+		 */
+		public function lblSpeciesIdspecies_Create($strControlId = null) {
+			$this->lblSpeciesIdspecies = new QLabel($this->objParentObject, $strControlId);
+			$this->lblSpeciesIdspecies->Name = QApplication::Translate('Species Idspecies Object');
+			$this->lblSpeciesIdspecies->Text = ($this->objCharacteristic->SpeciesIdspeciesObject) ? $this->objCharacteristic->SpeciesIdspeciesObject->__toString() : null;
+			$this->lblSpeciesIdspecies->Required = true;
+			return $this->lblSpeciesIdspecies;
+		}
+
+		/**
+		 * Create and setup QTextBox txtIdentifier
+		 * @param string $strControlId optional ControlId to use
+		 * @return QTextBox
+		 */
+		public function txtIdentifier_Create($strControlId = null) {
+			$this->txtIdentifier = new QTextBox($this->objParentObject, $strControlId);
+			$this->txtIdentifier->Name = QApplication::Translate('Identifier');
+			$this->txtIdentifier->Text = $this->objCharacteristic->Identifier;
+			$this->txtIdentifier->MaxLength = Characteristic::IdentifierMaxLength;
+			return $this->txtIdentifier;
+		}
+
+		/**
+		 * Create and setup QLabel lblIdentifier
+		 * @param string $strControlId optional ControlId to use
+		 * @return QLabel
+		 */
+		public function lblIdentifier_Create($strControlId = null) {
+			$this->lblIdentifier = new QLabel($this->objParentObject, $strControlId);
+			$this->lblIdentifier->Name = QApplication::Translate('Identifier');
+			$this->lblIdentifier->Text = $this->objCharacteristic->Identifier;
+			return $this->lblIdentifier;
 		}
 
 
@@ -376,6 +472,23 @@
 			}
 			if ($this->lblCharacteristicIdcharacteristic) $this->lblCharacteristicIdcharacteristic->Text = ($this->objCharacteristic->CharacteristicIdcharacteristicObject) ? $this->objCharacteristic->CharacteristicIdcharacteristicObject->__toString() : null;
 
+			if ($this->lstSpeciesIdspeciesObject) {
+					$this->lstSpeciesIdspeciesObject->RemoveAllItems();
+				if (!$this->blnEditMode)
+					$this->lstSpeciesIdspeciesObject->AddItem(QApplication::Translate('- Select One -'), null);
+				$objSpeciesIdspeciesObjectArray = Species::LoadAll();
+				if ($objSpeciesIdspeciesObjectArray) foreach ($objSpeciesIdspeciesObjectArray as $objSpeciesIdspeciesObject) {
+					$objListItem = new QListItem($objSpeciesIdspeciesObject->__toString(), $objSpeciesIdspeciesObject->Idspecies);
+					if (($this->objCharacteristic->SpeciesIdspeciesObject) && ($this->objCharacteristic->SpeciesIdspeciesObject->Idspecies == $objSpeciesIdspeciesObject->Idspecies))
+						$objListItem->Selected = true;
+					$this->lstSpeciesIdspeciesObject->AddItem($objListItem);
+				}
+			}
+			if ($this->lblSpeciesIdspecies) $this->lblSpeciesIdspecies->Text = ($this->objCharacteristic->SpeciesIdspeciesObject) ? $this->objCharacteristic->SpeciesIdspeciesObject->__toString() : null;
+
+			if ($this->txtIdentifier) $this->txtIdentifier->Text = $this->objCharacteristic->Identifier;
+			if ($this->lblIdentifier) $this->lblIdentifier->Text = $this->objCharacteristic->Identifier;
+
 		}
 
 
@@ -403,6 +516,8 @@
 				if ($this->txtDescription) $this->objCharacteristic->Description = $this->txtDescription->Text;
 				if ($this->txtPicturesPath) $this->objCharacteristic->PicturesPath = $this->txtPicturesPath->Text;
 				if ($this->lstCharacteristicIdcharacteristicObject) $this->objCharacteristic->CharacteristicIdcharacteristic = $this->lstCharacteristicIdcharacteristicObject->SelectedValue;
+				if ($this->lstSpeciesIdspeciesObject) $this->objCharacteristic->SpeciesIdspecies = $this->lstSpeciesIdspeciesObject->SelectedValue;
+				if ($this->txtIdentifier) $this->objCharacteristic->Identifier = $this->txtIdentifier->Text;
 
 				// Update any UniqueReverseReferences (if any) for controls that have been created for it
 
@@ -475,6 +590,18 @@
 				case 'CharacteristicIdcharacteristicLabel':
 					if (!$this->lblCharacteristicIdcharacteristic) return $this->lblCharacteristicIdcharacteristic_Create();
 					return $this->lblCharacteristicIdcharacteristic;
+				case 'SpeciesIdspeciesControl':
+					if (!$this->lstSpeciesIdspeciesObject) return $this->lstSpeciesIdspeciesObject_Create();
+					return $this->lstSpeciesIdspeciesObject;
+				case 'SpeciesIdspeciesLabel':
+					if (!$this->lblSpeciesIdspecies) return $this->lblSpeciesIdspecies_Create();
+					return $this->lblSpeciesIdspecies;
+				case 'IdentifierControl':
+					if (!$this->txtIdentifier) return $this->txtIdentifier_Create();
+					return $this->txtIdentifier;
+				case 'IdentifierLabel':
+					if (!$this->lblIdentifier) return $this->lblIdentifier_Create();
+					return $this->lblIdentifier;
 				default:
 					try {
 						return parent::__get($strName);
@@ -507,6 +634,10 @@
 						return ($this->txtPicturesPath = QType::Cast($mixValue, 'QControl'));
 					case 'CharacteristicIdcharacteristicControl':
 						return ($this->lstCharacteristicIdcharacteristicObject = QType::Cast($mixValue, 'QControl'));
+					case 'SpeciesIdspeciesControl':
+						return ($this->lstSpeciesIdspeciesObject = QType::Cast($mixValue, 'QControl'));
+					case 'IdentifierControl':
+						return ($this->txtIdentifier = QType::Cast($mixValue, 'QControl'));
 					default:
 						return parent::__set($strName, $mixValue);
 				}

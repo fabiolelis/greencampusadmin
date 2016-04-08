@@ -60,6 +60,7 @@
 			$this->dtgTrees->MetaAddColumn('Longitude');
 			$this->dtgTrees->MetaAddColumn('Latitude');
 			$this->dtgTrees->MetaAddColumn('Age');
+			$this->dtgTrees->MetaAddColumn('Identifier');
 		}
 	}
 

@@ -299,6 +299,9 @@
 				case 'PicturesPath': return QQN::Characteristic()->PicturesPath;
 				case 'CharacteristicIdcharacteristic': return QQN::Characteristic()->CharacteristicIdcharacteristic;
 				case 'CharacteristicIdcharacteristicObject': return QQN::Characteristic()->CharacteristicIdcharacteristicObject;
+				case 'SpeciesIdspecies': return QQN::Characteristic()->SpeciesIdspecies;
+				case 'SpeciesIdspeciesObject': return QQN::Characteristic()->SpeciesIdspeciesObject;
+				case 'Identifier': return QQN::Characteristic()->Identifier;
 				default: throw new QCallerException('Simple Property not found in CharacteristicDataGrid content: ' . $mixContent);
 			} else if ($mixContent instanceof QQAssociationNode)
 				throw new QCallerException('Content QQNode cannot go through any "To Many" association nodes.');

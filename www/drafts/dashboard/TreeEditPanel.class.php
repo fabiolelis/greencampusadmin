@@ -25,6 +25,7 @@
 		public $txtLongitude;
 		public $txtLatitude;
 		public $txtAge;
+		public $txtIdentifier;
 
 		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
 
@@ -59,6 +60,7 @@
 			$this->txtLongitude = $this->mctTree->txtLongitude_Create();
 			$this->txtLatitude = $this->mctTree->txtLatitude_Create();
 			$this->txtAge = $this->mctTree->txtAge_Create();
+			$this->txtIdentifier = $this->mctTree->txtIdentifier_Create();
 
 			// Create Buttons and Actions on this Form
 			$this->btnSave = new QButton($this);

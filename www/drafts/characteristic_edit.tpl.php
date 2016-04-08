@@ -27,6 +27,10 @@
 
 		<?php $this->lstCharacteristicIdcharacteristicObject->RenderWithName(); ?>
 
+		<?php $this->lstSpeciesIdspeciesObject->RenderWithName(); ?>
+
+		<?php $this->txtIdentifier->RenderWithName(); ?>
+
 	</div>
 
 	<div id="formActions">

@@ -28,6 +28,8 @@
 		protected $txtDescription;
 		protected $txtPicturesPath;
 		protected $lstCharacteristicIdcharacteristicObject;
+		protected $lstSpeciesIdspeciesObject;
+		protected $txtIdentifier;
 
 		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
 
@@ -59,6 +61,8 @@
 			$this->txtDescription = $this->mctCharacteristic->txtDescription_Create();
 			$this->txtPicturesPath = $this->mctCharacteristic->txtPicturesPath_Create();
 			$this->lstCharacteristicIdcharacteristicObject = $this->mctCharacteristic->lstCharacteristicIdcharacteristicObject_Create();
+			$this->lstSpeciesIdspeciesObject = $this->mctCharacteristic->lstSpeciesIdspeciesObject_Create();
+			$this->txtIdentifier = $this->mctCharacteristic->txtIdentifier_Create();
 
 			// Create Buttons and Actions on this Form
 			$this->btnSave = new QButton($this);

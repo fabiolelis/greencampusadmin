@@ -20,13 +20,6 @@
 		QApplicationBase::$ClassFile['speciesmetacontrol'] = __DATA_META_CONTROLS__ . '/SpeciesMetaControl.class.php';
 		QApplicationBase::$ClassFile['speciesdatagrid'] = __DATA_META_CONTROLS__ . '/SpeciesDataGrid.class.php';
 
-	// ClassPaths for the SpeciesHasCharacteristic class
-		QApplicationBase::$ClassFile['specieshascharacteristic'] = __DATA_CLASSES__ . '/SpeciesHasCharacteristic.class.php';
-		QApplicationBase::$ClassFile['qqnodespecieshascharacteristic'] = __DATA_CLASSES__ . '/SpeciesHasCharacteristic.class.php';
-		QApplicationBase::$ClassFile['qqreversereferencenodespecieshascharacteristic'] = __DATA_CLASSES__ . '/SpeciesHasCharacteristic.class.php';
-		QApplicationBase::$ClassFile['specieshascharacteristicmetacontrol'] = __DATA_META_CONTROLS__ . '/SpeciesHasCharacteristicMetaControl.class.php';
-		QApplicationBase::$ClassFile['specieshascharacteristicdatagrid'] = __DATA_META_CONTROLS__ . '/SpeciesHasCharacteristicDataGrid.class.php';
-
 	// ClassPaths for the Tree class
 		QApplicationBase::$ClassFile['tree'] = __DATA_CLASSES__ . '/Tree.class.php';
 		QApplicationBase::$ClassFile['qqnodetree'] = __DATA_CLASSES__ . '/Tree.class.php';

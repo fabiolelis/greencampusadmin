@@ -15,6 +15,8 @@
 
 		<?php $_CONTROL->txtAge->RenderWithName(); ?>
 
+		<?php $_CONTROL->txtIdentifier->RenderWithName(); ?>
+
 	</div>
 
 	<div id="formActions">

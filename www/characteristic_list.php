@@ -60,6 +60,8 @@
 			$this->dtgCharacteristics->MetaAddColumn('Description');
 			$this->dtgCharacteristics->MetaAddColumn('PicturesPath');
 			$this->dtgCharacteristics->MetaAddColumn(QQN::Characteristic()->CharacteristicIdcharacteristicObject->Title);
+			$this->dtgCharacteristics->MetaAddColumn(QQN::Characteristic()->SpeciesIdspeciesObject->Name);
+			$this->dtgCharacteristics->MetaAddColumn('Identifier');
 		}
 	}
 

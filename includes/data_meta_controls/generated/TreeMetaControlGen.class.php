@@ -26,6 +26,8 @@
 	 * property-read QLabel $LatitudeLabel
 	 * property QIntegerTextBox $AgeControl
 	 * property-read QLabel $AgeLabel
+	 * property QTextBox $IdentifierControl
+	 * property-read QLabel $IdentifierLabel
 	 * property-read string $TitleVerb a verb indicating whether or not this is being edited or created
 	 * property-read boolean $EditMode a boolean indicating whether or not this is being edited or created
 	 */
@@ -87,6 +89,12 @@
          */
 		protected $txtAge;
 
+        /**
+         * @var QTextBox txtIdentifier;
+         * @access protected
+         */
+		protected $txtIdentifier;
+
 
 		// Controls that allow the viewing of Tree's individual data fields
         /**
@@ -112,6 +120,12 @@
          * @access protected
          */
 		protected $lblAge;
+
+        /**
+         * @var QLabel lblIdentifier
+         * @access protected
+         */
+		protected $lblIdentifier;
 
 
 		// QListBox Controls (if applicable) to edit Unique ReverseReferences and ManyToMany References
@@ -235,7 +249,7 @@
 		 */
 		public function lstSpeciesIdspeciesObject_Create($strControlId = null, QQCondition $objCondition = null, $objOptionalClauses = null) {
 			$this->lstSpeciesIdspeciesObject = new QListBox($this->objParentObject, $strControlId);
-			$this->lstSpeciesIdspeciesObject->Name = QApplication::Translate('Species');
+			$this->lstSpeciesIdspeciesObject->Name = QApplication::Translate('Species Idspecies Object');
 			$this->lstSpeciesIdspeciesObject->Required = true;
 			if (!$this->blnEditMode)
 				$this->lstSpeciesIdspeciesObject->AddItem(QApplication::Translate('- Select One -'), null);
@@ -246,7 +260,7 @@
 
 			// Iterate through the Cursor
 			while ($objSpeciesIdspeciesObject = Species::InstantiateCursor($objSpeciesIdspeciesObjectCursor)) {
-				$objListItem = new QListItem($objSpeciesIdspeciesObject->Name, $objSpeciesIdspeciesObject->Idspecies);
+				$objListItem = new QListItem($objSpeciesIdspeciesObject->__toString(), $objSpeciesIdspeciesObject->Idspecies);
 				if (($this->objTree->SpeciesIdspeciesObject) && ($this->objTree->SpeciesIdspeciesObject->Idspecies == $objSpeciesIdspeciesObject->Idspecies))
 					$objListItem->Selected = true;
 				$this->lstSpeciesIdspeciesObject->AddItem($objListItem);
@@ -345,6 +359,31 @@
 			return $this->lblAge;
 		}
 
+		/**
+		 * Create and setup QTextBox txtIdentifier
+		 * @param string $strControlId optional ControlId to use
+		 * @return QTextBox
+		 */
+		public function txtIdentifier_Create($strControlId = null) {
+			$this->txtIdentifier = new QTextBox($this->objParentObject, $strControlId);
+			$this->txtIdentifier->Name = QApplication::Translate('Identifier');
+			$this->txtIdentifier->Text = $this->objTree->Identifier;
+			$this->txtIdentifier->MaxLength = Tree::IdentifierMaxLength;
+			return $this->txtIdentifier;
+		}
+
+		/**
+		 * Create and setup QLabel lblIdentifier
+		 * @param string $strControlId optional ControlId to use
+		 * @return QLabel
+		 */
+		public function lblIdentifier_Create($strControlId = null) {
+			$this->lblIdentifier = new QLabel($this->objParentObject, $strControlId);
+			$this->lblIdentifier->Name = QApplication::Translate('Identifier');
+			$this->lblIdentifier->Text = $this->objTree->Identifier;
+			return $this->lblIdentifier;
+		}
+
 
 
 		/**
@@ -381,6 +420,9 @@
 			if ($this->txtAge) $this->txtAge->Text = $this->objTree->Age;
 			if ($this->lblAge) $this->lblAge->Text = $this->objTree->Age;
 
+			if ($this->txtIdentifier) $this->txtIdentifier->Text = $this->objTree->Identifier;
+			if ($this->lblIdentifier) $this->lblIdentifier->Text = $this->objTree->Identifier;
+
 		}
 
 
@@ -408,6 +450,7 @@
 				if ($this->txtLongitude) $this->objTree->Longitude = $this->txtLongitude->Text;
 				if ($this->txtLatitude) $this->objTree->Latitude = $this->txtLatitude->Text;
 				if ($this->txtAge) $this->objTree->Age = $this->txtAge->Text;
+				if ($this->txtIdentifier) $this->objTree->Identifier = $this->txtIdentifier->Text;
 
 				// Update any UniqueReverseReferences (if any) for controls that have been created for it
 
@@ -480,6 +523,12 @@
 				case 'AgeLabel':
 					if (!$this->lblAge) return $this->lblAge_Create();
 					return $this->lblAge;
+				case 'IdentifierControl':
+					if (!$this->txtIdentifier) return $this->txtIdentifier_Create();
+					return $this->txtIdentifier;
+				case 'IdentifierLabel':
+					if (!$this->lblIdentifier) return $this->lblIdentifier_Create();
+					return $this->lblIdentifier;
 				default:
 					try {
 						return parent::__get($strName);
@@ -512,6 +561,8 @@
 						return ($this->txtLatitude = QType::Cast($mixValue, 'QControl'));
 					case 'AgeControl':
 						return ($this->txtAge = QType::Cast($mixValue, 'QControl'));
+					case 'IdentifierControl':
+						return ($this->txtIdentifier = QType::Cast($mixValue, 'QControl'));
 					default:
 						return parent::__set($strName, $mixValue);
 				}

@@ -13,9 +13,11 @@
 
 	switch (SERVER_INSTANCE) {
 		case 'dev':
-			define ('__DOCROOT__', 'C:/wamp/www');
+			define ('__DOCROOT__', '/Library/WebServer/Documents/');
+			//define ('__DOCROOT__', 'C:/wamp/www');
 			define ('__VIRTUAL_DIRECTORY__', '');
-			define ('__SUBDIRECTORY__', '/gcadmin2/www');
+			//define ('__SUBDIRECTORY__', '/wwww/gcadmin2');
+			define ('__SUBDIRECTORY__', '/gcadmin/www');
 			define('DB_CONNECTION_1', serialize(array(
 				'adapter' => 'MySqli5',
 				'server' => '127.0.0.1:3306',

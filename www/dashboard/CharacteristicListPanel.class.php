@@ -69,7 +69,9 @@
 			$this->dtgCharacteristics->MetaAddColumn('Title');
 			$this->dtgCharacteristics->MetaAddColumn('Description');
 			$this->dtgCharacteristics->MetaAddColumn('PicturesPath');
-			$this->dtgCharacteristics->MetaAddColumn(QQN::Characteristic()->CharacteristicIdcharacteristicObject->Title);
+			$this->dtgCharacteristics->MetaAddColumn(QQN::Characteristic()->CharacteristicIdcharacteristicObject);
+			$this->dtgCharacteristics->MetaAddColumn(QQN::Characteristic()->SpeciesIdspeciesObject);
+			$this->dtgCharacteristics->MetaAddColumn('Identifier');
 
 			// Setup the Create New button
 			$this->btnCreateNew = new QButton($this);

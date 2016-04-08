@@ -235,6 +235,10 @@
 						throw new QCallerException('File does not exist: ' . $strFile);
 
 					$strNewFilePath = $this->strTemporaryUploadFolder . '/' . md5(microtime());
+
+				//	if ( !file_exists($strTemporaryUploadFolder) ) {
+				//	     mkdir ($strTemporaryUploadFolder, 0744);
+ 				//	}
 					copy($strFile, $strNewFilePath);
 					$this->intFileSize = filesize($strNewFilePath);
 					$this->strFilePath = $strNewFilePath;

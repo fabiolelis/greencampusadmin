@@ -1,6 +1,6 @@
 <?php
 	// Include prepend.inc to load Qcodo
-	require(dirname(__FILE__) . '/../includes/prepend.inc.php');
+	require(dirname(__FILE__) . '/../../includes/prepend.inc.php');
 
 	// Security check for ALLOW_REMOTE_ADMIN
 	// To allow access REGARDLESS of ALLOW_REMOTE_ADMIN, simply remove the line below
@@ -36,7 +36,7 @@
 ?>
 
 	<div id="titleBar">
-		<h2 id="right"><a href="<?php _p(__VIRTUAL_DIRECTORY__ . __PANEL_DRAFTS__) ?>/index.php">&laquo; <?php _t('Go to "Panel Drafts"'); ?></a></h2>
+		<h2 id="right"><a href="<?php _p(__VIRTUAL_DIRECTORY__ . __FORM_DRAFTS__) ?>/index.php">&laquo; <?php _t('Go to "Panel"'); ?></a></h2>
 		<h2><?php _t('Form Drafts') ?></h2>
 		<h1><?php _t('List of Form Drafts') ?></h1>
 	</div>
@@ -50,8 +50,8 @@
 		}
 ?>
 		<p>&nbsp;</p>
-		<h1><?php _t('Panel Drafts') ?></h1>
-		<p class="create"><a href="<?php _p(__VIRTUAL_DIRECTORY__ . __PANEL_DRAFTS__) ?>"><?php _t('Go to "Panel Drafts"') ?></a></p>
+		<h1><?php _t('Panel') ?></h1>
+		<p class="create"><a href="<?php _p(__VIRTUAL_DIRECTORY__ . __FORM_DRAFTS__) ?>"><?php _t('Go to "Panel"') ?></a></p>
 	</div>
 
 <?php require (__INCLUDES__ . '/footer.inc.php'); ?>

@@ -19,5 +19,9 @@
 	 * 
 	 */
 	class CharacteristicDataGrid extends CharacteristicDataGridGen {
+
+		
+
+
 	}
 ?>
