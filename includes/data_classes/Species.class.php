@@ -28,6 +28,17 @@
 		}
 
 
+		public function getSpeciesJson(){
+			$str = "{";
+			$str .= "\"species\": {";
+			$str .= "\"id\" : ". $this->Idspecies . ", ";
+			$str .= "\"name\" : \"". $this->Name . "\" ";
+			//$str .= "\"description\" : \"". $this->Description . "\" ";
+
+			$str .= "}";
+			$str .= "}";
+			return $str;
+		}
 		// Override or Create New Load/Count methods
 		// (For obvious reasons, these methods are commented out...
 		// but feel free to use these as a starting point)
