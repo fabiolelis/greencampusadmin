@@ -32,8 +32,11 @@
 			$str = "{";
 			$str .= "\"species\": {";
 			$str .= "\"id\" : ". $this->Idspecies . ", ";
-			$str .= "\"name\" : \"". $this->Name . "\" ";
-			//$str .= "\"description\" : \"". $this->Description . "\" ";
+			$str .= "\"name\" : \"". $this->Name . "\", ";
+			$str .= "\"latinname\" : \"". $this->LatinName . "\", ";
+			$str .= "\"irishname\" : \"". $this->Irishname . "\", ";
+			$str .= "\"description\" : \"". $this->Description . "\" ";
+
 
 			$str .= "}";
 			$str .= "}";
