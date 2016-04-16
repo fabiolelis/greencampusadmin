@@ -58,7 +58,7 @@
 					$str .= "\"location\" : \"". $events->Location . "\", ";
 					$str .= "\"description\" : \"". $events->Description . "\", ";
 					$str .= "\"images\" : \"". $events->Images . "\", ";
-					$str .= "\"imagesweburl\" : \"". $this->ImageWebUrl() . "\", ";
+					$str .= "\"imagesweburl\" : \"". $events->ImageWebUrl() . "\", ";
 					$str .= "\"videos\" : \"". $events->Videos . "\" ";
 				$str .= "},";
 
