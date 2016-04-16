@@ -42,6 +42,30 @@
 			$str .= "}";
 			return $str;
 		}
+
+		public static function getArraySpeciesJson($arraySpecies){
+
+			//var_dump($arraySpecies);
+			//die();
+			$str = "{\"Species\":[";
+			foreach($arraySpecies as $species){
+				$str .= "{";
+				$str .= "\"id\" : ". $species->Idspecies . ", ";
+				$str .= "\"name\" : \"". $species->Name . "\", ";
+				$str .= "\"latinname\" : \"". $species->LatinName . "\", ";
+				$str .= "\"irishname\" : \"". $species->Irishname . "\", ";
+				$str .= "\"description\" : \"". $species->Description . "\" ";
+				$str .= "},";
+
+			}
+			$str = substr_replace($str, "", -1);
+
+			$str .= "]}";
+			return $str;
+
+		}
+
+
 		// Override or Create New Load/Count methods
 		// (For obvious reasons, these methods are commented out...
 		// but feel free to use these as a starting point)

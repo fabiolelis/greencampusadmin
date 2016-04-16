@@ -61,18 +61,4 @@ if(isset($_GET) && strpos($_SERVER["QUERY_STRING"], 'tree') == true && strpos($_
 
 
 
-//return species with id
-if(isset($_GET) && strpos($_SERVER["QUERY_STRING"], 'species') == true && strpos($_SERVER["QUERY_STRING"], 'id') == true){
-   
-   parse_str($_SERVER["QUERY_STRING"], $query);
-   $speciesID = $query["id"];
-   //$speciesID = "1";
-   $t = new Species();
-   $t = Species::Load($speciesID);
-
-   //build json and return it
-   $speciesJson = $t->getSpeciesJson();
-   echo $speciesJson;
-   
-}
 ?>
