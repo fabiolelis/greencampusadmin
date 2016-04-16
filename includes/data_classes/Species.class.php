@@ -30,15 +30,14 @@
 
 		public function getSpeciesJson(){
 			$str = "{";
-			$str .= "\"species\": {";
-			$str .= "\"id\" : ". $this->Idspecies . ", ";
-			$str .= "\"name\" : \"". $this->Name . "\", ";
-			$str .= "\"latinname\" : \"". $this->LatinName . "\", ";
-			$str .= "\"irishname\" : \"". $this->Irishname . "\", ";
-			$str .= "\"description\" : \"". $this->Description . "\" ";
+				$str .= "\"species\": {";
+					$str .= "\"id\" : ". $this->Idspecies . ", ";
+					$str .= "\"name\" : \"". $this->Name . "\", ";
+					$str .= "\"latinname\" : \"". $this->LatinName . "\", ";
+					$str .= "\"irishname\" : \"". $this->Irishname . "\", ";
+					$str .= "\"description\" : \"". $this->Description . "\" ";
 
-
-			$str .= "}";
+				$str .= "}";
 			$str .= "}";
 			return $str;
 		}
@@ -50,11 +49,11 @@
 			$str = "{\"Species\":[";
 			foreach($arraySpecies as $species){
 				$str .= "{";
-				$str .= "\"id\" : ". $species->Idspecies . ", ";
-				$str .= "\"name\" : \"". $species->Name . "\", ";
-				$str .= "\"latinname\" : \"". $species->LatinName . "\", ";
-				$str .= "\"irishname\" : \"". $species->Irishname . "\", ";
-				$str .= "\"description\" : \"". $species->Description . "\" ";
+					$str .= "\"id\" : ". $species->Idspecies . ", ";
+					$str .= "\"name\" : \"". $species->Name . "\", ";
+					$str .= "\"latinname\" : \"". $species->LatinName . "\", ";
+					$str .= "\"irishname\" : \"". $species->Irishname . "\", ";
+					$str .= "\"description\" : \"". $species->Description . "\" ";
 				$str .= "},";
 
 			}

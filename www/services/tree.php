@@ -1,10 +1,37 @@
 <?php
-require(dirname(__FILE__) . '/../includes/prepend.inc.php');
+require(dirname(__FILE__) . '/../../includes/prepend.inc.php');
 require(__DATA_CLASSES__ . '/Tree.class.php');
 
 header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
 header('Access-Control-Allow-Origin: *');
 
+
+//return tree with id
+if(isset($_GET) && strpos($_SERVER["QUERY_STRING"], 'id') !== false ){
+   
+   
+   parse_str($_SERVER["QUERY_STRING"], $query);
+   $treeID = $query["id"];
+   //$speciesID = "1";
+   $t = new Tree();
+   $t = Tree::Load($treeID);
+
+   //build json and return it
+   $treesJson = $t->getTreeJson();
+   echo $treesJson;
+
+}
+
+//return all trees
+if(isset($_GET) && strpos($_SERVER["QUERY_STRING"], 'id') === false){
+   
+   $list = Tree::LoadAll();
+   $str = Tree::getArrayTreeJson($list);
+   echo $str;
+}
+
+
+/*
 //post tree
 if(isset($_POST['tree'])){
 
@@ -20,45 +47,7 @@ if(isset($_POST['tree'])){
    //var_dump($t);
    
 }
-
-//return all trees
-if(isset($_GET) && strpos($_SERVER["QUERY_STRING"], 'tree') == true && strpos($_SERVER["QUERY_STRING"], 'id') == false){
-	
-   $list = Tree::LoadAll();
-   $str = "[";
-   $i = 0;
-
-
-   for ($i=0; $i < sizeof($list); $i++) {
-
-   		$tree = $list[$i];
-   		$str .= '{ \"name\": \"' . $tree->Name . ',\"age\":'. $tree->Age . '}';
-   		if($i < sizeof($list) - 1)
-   			$str .= ',';
-   }
-   
-   
-   
-   $str .= ']';
-   var_dump($str);
-   
-}
-
-
-//return tree with id
-if(isset($_GET) && strpos($_SERVER["QUERY_STRING"], 'tree') == true && strpos($_SERVER["QUERY_STRING"], 'id') == true){
-   
-   parse_str($_SERVER["QUERY_STRING"], $query);
-   $treeID = $query["id"];
-   $t = new Tree();
-   $t = Tree::Load($treeID);
-
-   //build json and return it
-
-   var_dump($t);
-   
-}
-
+*/
 
 
 ?>

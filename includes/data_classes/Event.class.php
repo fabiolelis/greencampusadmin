@@ -27,10 +27,66 @@
 			return sprintf('Event Object %s',  $this->intIdevent);
 		}
 
+		public function getEventJson(){
+			$str = "{";
+				$str .= "\"event\": {";
+					$str .= "\"id\" : ". $this->Idevent . ", ";
+
+					$str .= "\"datetime\" : \"". $this->DateTime . "\", ";
+					$str .= "\"location\" : \"". $this->Location . "\", ";
+					$str .= "\"description\" : \"". $this->Description . "\", ";
+					$str .= "\"images\" : \"". $this->Images . "\", ";
+					$str .= "\"videos\" : \"". $this->Videos . "\" ";
+
+
+				$str .= "}";
+			$str .= "}";
+			return $str;
+		}
+
+		public static function getArrayEventJson($arrayEvents){
+
+			//var_dump($arraySpecies);
+			//die();
+			$str = "{\"Events\":[";
+			foreach($arrayEvents as $events){
+				$str .= "{";
+					$str .= "\"id\" : ". $events->Idevent . ", ";
+
+					$str .= "\"datetime\" : \"". $events->DateTime . "\", ";
+					$str .= "\"location\" : \"". $events->Location . "\", ";
+					$str .= "\"description\" : \"". $events->Description . "\", ";
+					$str .= "\"images\" : \"". $events->Images . "\", ";
+					$str .= "\"videos\" : \"". $events->Videos . "\" ";
+				$str .= "},";
+
+			}
+			$str = substr_replace($str, "", -1);
+
+			$str .= "]}";
+			return $str;
+
+		}
+
 
 		// Override or Create New Load/Count methods
 		// (For obvious reasons, these methods are commented out...
 		// but feel free to use these as a starting point)
+
+		/**
+		 * Load all Events
+		 * @param QQClause[] $objOptionalClauses additional optional QQClause objects for this query
+		 * @return Event[]
+		 */
+		public static function LoadAll($objOptionalClauses = null) {
+			// Call Event::QueryArray to perform the LoadAll query
+			try {
+				return Event::QueryArray(QQ::All(), $objOptionalClauses);
+			} catch (QCallerException $objExc) {
+				$objExc->IncrementOffset();
+				throw $objExc;
+			}
+		}
 /*
 		public static function LoadArrayBySample($strParam1, $intParam2, $objOptionalClauses = null) {
 			// This will return an array of Event objects

@@ -874,6 +874,8 @@
 					// @return string
 					return $this->strIdentifier;
 
+				case 'SpeciesName':
+					return $this->SpeciesIdspeciesObject->Name;
 
 				///////////////////
 				// Member Objects
