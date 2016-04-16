@@ -31,6 +31,17 @@
 		// Override or Create New Load/Count methods
 		// (For obvious reasons, these methods are commented out...
 		// but feel free to use these as a starting point)
+
+		public static function LoadArrayBySpecies($intSpeciesid, $objOptionalClauses = null) {
+			// This will return an array of Characteristic objects
+			return Characteristic::QueryArray(
+				QQ::Equal(QQN::Characteristic()->SpeciesIdspecies, $intSpeciesid),
+
+				$objOptionalClauses
+			);
+		}
+
+
 /*
 		public static function LoadArrayBySample($strParam1, $intParam2, $objOptionalClauses = null) {
 			// This will return an array of Characteristic objects

@@ -29,12 +29,20 @@
 
 
 		public function getSpeciesJson(){
+			$mainImg = $this->MainImageUrl();
+
+			if ($mainImg == null || $mainImg == ""){
+				$mainImg = __VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__ . '/assets/images/trees/phpPryDbG1677.png';
+				//var_dump($mainImg);
+			}
+
 			$str = "{";
 				$str .= "\"species\": {";
 					$str .= "\"id\" : ". $this->Idspecies . ", ";
 					$str .= "\"name\" : \"". $this->Name . "\", ";
 					$str .= "\"latinname\" : \"". $this->LatinName . "\", ";
 					$str .= "\"irishname\" : \"". $this->Irishname . "\", ";
+					$str .= "\"mainimage\" : \"". $mainImg  . "\", ";
 					$str .= "\"description\" : \"". $this->Description . "\" ";
 
 				$str .= "}";
@@ -44,15 +52,21 @@
 
 		public static function getArraySpeciesJson($arraySpecies){
 
-			//var_dump($arraySpecies);
-			//die();
+			
 			$str = "{\"Species\":[";
 			foreach($arraySpecies as $species){
+
+				$mainImg = $species->MainImageUrl();
+
+				if ($mainImg == null || $mainImg == "")
+					$mainImg = __VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__ . '/assets/images/trees/phpPryDbG1677.png';	
+
 				$str .= "{";
 					$str .= "\"id\" : ". $species->Idspecies . ", ";
 					$str .= "\"name\" : \"". $species->Name . "\", ";
 					$str .= "\"latinname\" : \"". $species->LatinName . "\", ";
 					$str .= "\"irishname\" : \"". $species->Irishname . "\", ";
+					$str .= "\"mainimage\" : \"". $mainImg. "\", ";
 					$str .= "\"description\" : \"". $species->Description . "\" ";
 				$str .= "},";
 
@@ -136,23 +150,8 @@
 		// For performance reasons, these variables and __set and __get override methods
 		// are commented out.  But if you wish to implement or override any
 		// of the data generated properties, please feel free to uncomment them.
-/*
-		protected $strSomeNewProperty;
 
-		public function __get($strName) {
-			switch ($strName) {
-				case 'SomeNewProperty': return $this->strSomeNewProperty;
-
-				default:
-					try {
-						return parent::__get($strName);
-					} catch (QCallerException $objExc) {
-						$objExc->IncrementOffset();
-						throw $objExc;
-					}
-			}
-		}
-
+		/*
 		public function __set($strName, $mixValue) {
 			switch ($strName) {
 				case 'SomeNewProperty':
@@ -172,6 +171,46 @@
 					}
 			}
 		}
-*/
+		*/
+
+		public function MainImageUrl(){
+			$arrayCharac = Characteristic::LoadArrayBySpecies($this->Idspecies);
+
+			foreach ($arrayCharac as $charac) {
+				if($charac->PicturesPath != null && $charac->PicturesPath != "")
+					//var_dump($charac->PicturesPath);
+					return Species::ImageWebUrl($charac->PicturesPath);
+					//return $charac->PicturesPath;
+			}
+		}
+
+		public function ImageWebUrl($str) {
+			
+			// Now, we need to see if the file, itself, is actually in the docroot somewhere so that
+			// it can be viewed, and if so, we need to return the web-based URL (relative to the docroot)			
+
+			if ($str) {
+
+				// Normalize all backslashes to just plain slashes 
+
+				$str = str_replace('\\', '/', substr($str, 0, strlen($str)));
+				$strDocRoot = str_replace('\\', '/', __DOCROOT__ . __SUBDIRECTORY__);
+
+				//if (contains($str,$strDocRoot)) {
+					
+					$strToReturn = __VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__ . '/' . substr_replace($str, "", 0, strlen($strDocRoot));
+
+					// On Windows, we must replace all "\" with "/"
+					if (substr(__DOCROOT__ . __SUBDIRECTORY__, 1, 2) == ':\\') {
+						$strToReturn = str_replace('\\', '/', $strToReturn);
+					}
+
+					return $strToReturn;
+			//	}
+			}
+
+			return null;
+		}
+
 	}
 ?>

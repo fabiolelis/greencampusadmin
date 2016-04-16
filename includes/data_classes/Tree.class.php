@@ -28,6 +28,12 @@
 		}
 
 		public function getTreeJson(){
+			$mainImg = $this->SpeciesIdspeciesObject->MainImageUrl() ;
+
+			if ($mainImg == null || $mainImg == ""){
+				$mainImg = __VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__ . '/assets/images/trees/phpPryDbG1677.png';
+				//var_dump($mainImg);
+			}
 			$str = "{";
 				$str .= "\"tree\": {";
 					$str .= "\"id\" : ". $this->Idtree . ", ";
@@ -37,7 +43,8 @@
 						$str .= "\"identifier\" : \"". $this->Identifier . "\", ";
 						$str .= "\"latitude\" : \"". $this->Latitude . "\", ";
 						$str .= "\"longitude\" : \"". $this->Longitude . "\", ";
-						$str .= "\"speciesname\" : \"". $this->SpeciesName . "\" ";
+						$str .= "\"speciesname\" : \"". $this->SpeciesName . "\", ";
+						$str .= "\"mainimage\" : \"". $mainImg . "\" ";
 
 				$str .= "}";
 			$str .= "}";
@@ -58,7 +65,9 @@
 					$str .= "\"identifier\" : \"". $tree->Identifier . "\", ";
 					$str .= "\"latitude\" : \"". $tree->Latitude . "\", ";
 					$str .= "\"longitude\" : \"". $tree->Longitude . "\", ";
-					$str .= "\"speciesname\" : \"". $tree->SpeciesName . "\" ";
+					$str .= "\"speciesname\" : \"". $tree->SpeciesName . "\", ";
+					$str .= "\"mainimage\" : \"". $tree->SpeciesIdspeciesObject->MainImageUrl() . "\" ";
+
 				$str .= "},";
 
 			}
