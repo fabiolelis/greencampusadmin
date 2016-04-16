@@ -41,8 +41,8 @@
 						$str .= "\"speciesid\" : ". $this->SpeciesIdspecies . ", ";
 
 						$str .= "\"identifier\" : \"". $this->Identifier . "\", ";
-						$str .= "\"latitude\" : \"". $this->Latitude . "\", ";
-						$str .= "\"longitude\" : \"". $this->Longitude . "\", ";
+						$str .= "\"latitude\" :" . $this->Latitude . ", ";
+						$str .= "\"longitude\" :" . $this->Longitude . ", ";
 						$str .= "\"speciesname\" : \"". $this->SpeciesName . "\", ";
 						$str .= "\"mainimage\" : \"". $mainImg . "\" ";
 
@@ -63,8 +63,8 @@
 					$str .= "\"speciesid\" : ". $tree->SpeciesIdspecies . ", ";
 
 					$str .= "\"identifier\" : \"". $tree->Identifier . "\", ";
-					$str .= "\"latitude\" : \"". $tree->Latitude . "\", ";
-					$str .= "\"longitude\" : \"". $tree->Longitude . "\", ";
+					$str .= "\"latitude\" : ". $tree->Latitude . ", ";
+					$str .= "\"longitude\" : ". $tree->Longitude . ", ";
 					$str .= "\"speciesname\" : \"". $tree->SpeciesName . "\", ";
 					$str .= "\"mainimage\" : \"". $tree->SpeciesIdspeciesObject->MainImageUrl() . "\" ";
 
