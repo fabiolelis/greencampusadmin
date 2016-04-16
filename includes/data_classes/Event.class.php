@@ -36,6 +36,7 @@
 					$str .= "\"location\" : \"". $this->Location . "\", ";
 					$str .= "\"description\" : \"". $this->Description . "\", ";
 					$str .= "\"images\" : \"". $this->Images . "\", ";
+					$str .= "\"imagesweburl\" : \"". $this->ImageWebUrl() . "\", ";
 					$str .= "\"videos\" : \"". $this->Videos . "\" ";
 
 
@@ -57,6 +58,7 @@
 					$str .= "\"location\" : \"". $events->Location . "\", ";
 					$str .= "\"description\" : \"". $events->Description . "\", ";
 					$str .= "\"images\" : \"". $events->Images . "\", ";
+					$str .= "\"imagesweburl\" : \"". $this->ImageWebUrl() . "\", ";
 					$str .= "\"videos\" : \"". $events->Videos . "\" ";
 				$str .= "},";
 
@@ -66,6 +68,35 @@
 			$str .= "]}";
 			return $str;
 
+		}
+
+		public function ImageWebUrl() {
+			
+			// Now, we need to see if the file, itself, is actually in the docroot somewhere so that
+			// it can be viewed, and if so, we need to return the web-based URL (relative to the docroot)
+			$str = $this->Images;
+
+			if ($str) {
+
+				// Normalize all backslashes to just plain slashes 
+
+				$str = str_replace('\\', '/', substr($str, 0, strlen($str)));
+				$strDocRoot = str_replace('\\', '/', __DOCROOT__ . __SUBDIRECTORY__);
+
+				//if (contains($str,$strDocRoot)) {
+					
+					$strToReturn = __VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__ . '/' . substr_replace($str, "", 0, strlen($strDocRoot));
+
+					// On Windows, we must replace all "\" with "/"
+					if (substr(__DOCROOT__ . __SUBDIRECTORY__, 1, 2) == ':\\') {
+						$strToReturn = str_replace('\\', '/', $strToReturn);
+					}
+
+					return $strToReturn;
+			//	}
+			}
+
+			return null;
 		}
 
 

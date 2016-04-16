@@ -15,7 +15,7 @@
 		case 'dev':
 			define ('__DOCROOT__', '/Library/WebServer/Documents/');
 			//define ('__DOCROOT__', 'C:/wamp/www');
-			define ('__VIRTUAL_DIRECTORY__', '');
+			define ('__VIRTUAL_DIRECTORY__', 'http://localhost');
 			//define ('__SUBDIRECTORY__', '/wwww/gcadmin2');
 			define ('__SUBDIRECTORY__', '/gcadmin/www');
 			define('DB_CONNECTION_1', serialize(array(
