@@ -63,10 +63,12 @@
 				$str .= "\"idspecies\" : ". $this->SpeciesIdspecies . ", ";
 				$str .= "\"title\" : \"". $this->Title . "\", ";
 				$str .= "\"description\" : \"". str_replace(array("\r", "\n"), '', $this->Description) . "\", ";
-				$str .= "\"picturespath\" : \"". $this->PicturesPath . "\", ";
+				
+				//Replace os \
+				$str .= "\"picturespath\" : \"". str_replace(array("\\", "\\\\"), '', $this->PicturesPath) . "\", ";
 				$str .= "\"weburlimage\" : \"". $this->ImageWebUrl() . "\", ";
 				$str .= "\"idparent\" : " . $parent . ", ";
-				$str .= "\"identifier\" : \"" . $this->Identifier . "\" ";
+				$str .= "\"identifier\" : \"" . $this->Identifier . "\ ";
 
 			$str .= "}";
 			return $str;
