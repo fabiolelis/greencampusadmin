@@ -51,7 +51,10 @@
 			$this->calDateTime->MinimumYear = 2016;
 			$this->calDateTime->MaximumYear = 2100;
 
-			if($strControlId == null){
+			//var_dump($this->Event->Idevent );
+			//die();
+
+			if($this->Event->Idevent == null){
 				$midnight_utc = new QDateTime('today midnight');
 
 				$this->calDateTime->DateTime = $midnight_utc;

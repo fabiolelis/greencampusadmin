@@ -43,7 +43,9 @@
 					$str .= "\"latinname\" : \"". $this->LatinName . "\", ";
 					$str .= "\"irishname\" : \"". $this->Irishname . "\", ";
 					$str .= "\"mainimage\" : \"". $mainImg  . "\", ";
-					$str .= "\"description\" : \"". $this->Description . "\" ";
+					$str .= "\"description\" : \"". str_replace(array("\r", "\n"), '', $this->Description) . "\" ";
+					
+					//$str .= "\"description\" : \"". $this->Description . "\" ";
 
 				$str .= "}";
 			$str .= "}";
@@ -67,7 +69,7 @@
 					$str .= "\"latinname\" : \"". $species->LatinName . "\", ";
 					$str .= "\"irishname\" : \"". $species->Irishname . "\", ";
 					$str .= "\"mainimage\" : \"". $mainImg. "\", ";
-					$str .= "\"description\" : \"". $species->Description . "\" ";
+					$str .= "\"description\" : \"". str_replace(array("\r", "\n"), '', $species->Description) . "\" ";
 				$str .= "},";
 
 			}
