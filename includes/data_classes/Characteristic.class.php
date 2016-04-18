@@ -42,6 +42,65 @@
 		}
 
 
+		public static function LoadArrayOfChildren($intIdcharacteristic){
+			return Characteristic::QueryArray(
+				QQ::Equal(QQN::Characteristic()->Parent->Idcharacteristic, $intIdcharacteristic),
+
+				$objOptionalClauses
+			);
+		}
+
+		public function getCharacsJson(){
+			
+			$parent = 0;
+
+			if($this->CharacteristicIdcharacteristic != null)
+				$parent = $this->CharacteristicIdcharacteristic;
+
+			$str = "{";
+
+				$str .= "\"id\" : ". $this->Idcharacteristic . ", ";
+				$str .= "\"idspecies\" : ". $this->SpeciesIdspecies . ", ";
+				$str .= "\"title\" : \"". $this->Title . "\", ";
+				$str .= "\"description\" : \"". str_replace(array("\r", "\n"), '', $this->Description) . "\", ";
+				$str .= "\"picturespath\" : \"". $this->PicturesPath . "\", ";
+				$str .= "\"weburlimage\" : \"". $this->ImageWebUrl() . "\", ";
+				$str .= "\"idparent\" : " . $parent . ", ";
+				$str .= "\"identifier\" : \"" . $this->Identifier . "\" ";
+
+			$str .= "}";
+			return $str;
+		}
+
+
+		public function ImageWebUrl() {
+			
+			// Now, we need to see if the file, itself, is actually in the docroot somewhere so that
+			// it can be viewed, and if so, we need to return the web-based URL (relative to the docroot)
+			$str = $this->PicturesPath;
+
+			if ($str) {
+
+				// Normalize all backslashes to just plain slashes 
+
+				$str = str_replace('\\', '/', substr($str, 0, strlen($str)));
+				$strDocRoot = str_replace('\\', '/', __DOCROOT__ . __SUBDIRECTORY__);
+
+				//if (contains($str,$strDocRoot)) {
+					
+					$strToReturn = __VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__ . '/' . substr_replace($str, "", 0, strlen($strDocRoot));
+
+					// On Windows, we must replace all "\" with "/"
+					if (substr(__DOCROOT__ . __SUBDIRECTORY__, 1, 2) == ':\\') {
+						$strToReturn = str_replace('\\', '/', $strToReturn);
+					}
+
+					return $strToReturn;
+			//	}
+			}
+
+			return null;
+		}
 /*
 		public static function LoadArrayBySample($strParam1, $intParam2, $objOptionalClauses = null) {
 			// This will return an array of Characteristic objects

@@ -52,6 +52,49 @@
 			return $str;
 		}
 
+		public function getSpeciesJsonWithCharacs(){
+			$mainImg = $this->MainImageUrl();
+
+			if ($mainImg == null || $mainImg == ""){
+				$mainImg = __VIRTUAL_DIRECTORY__ . __SUBDIRECTORY__ . '/assets/images/trees/phpPryDbG1677.png';
+				//var_dump($mainImg);
+			}
+
+			$str = "{";
+				$str .= "\"species\": {";
+					$str .= "\"id\" : ". $this->Idspecies . ", ";
+					$str .= "\"name\" : \"". $this->Name . "\", ";
+					$str .= "\"latinname\" : \"". $this->LatinName . "\", ";
+					$str .= "\"irishname\" : \"". $this->Irishname . "\", ";
+					$str .= "\"mainimage\" : \"". $mainImg  . "\", ";
+					$str .= "\"description\" : \"". str_replace(array("\r", "\n"), '', $this->Description) . "\", ";
+					
+					
+					$str .= $this->getArrayCharacsJson();
+					
+
+				$str .= "}";
+			$str .= "}";
+			return $str;
+		}
+
+		public function getArrayCharacsJson(){
+
+			$characsArray = Characteristic::LoadArrayBySpecies($this->Idspecies);
+			$str = "\"characteristics\" : [";
+			
+			foreach ($characsArray as $charac) {
+				$str .= $charac->getCharacsJson();
+				$str .= ",";
+			}
+			
+			$str = substr_replace($str, "", -1);
+			$str .= "]";
+			return $str;
+
+		}
+
+
 		public static function getArraySpeciesJson($arraySpecies){
 
 			

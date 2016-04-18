@@ -12,7 +12,9 @@ header('Access-Control-Allow-Origin: *');
 
 
 
-//return species with id
+
+
+//return species with id and its characteritics
 if(isset($_GET) && strpos($_SERVER["QUERY_STRING"], 'id') !== false ){
    
    parse_str($_SERVER["QUERY_STRING"], $query);
@@ -22,7 +24,8 @@ if(isset($_GET) && strpos($_SERVER["QUERY_STRING"], 'id') !== false ){
    $t = Species::Load($speciesID);
 
    //build json and return it
-   $speciesJson = $t->getSpeciesJson();
+   //$speciesJson = $t->getSpeciesJson();
+   $speciesJson = $t->getSpeciesJsonWithCharacs();
    echo $speciesJson;
    
 }
