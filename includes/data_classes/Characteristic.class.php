@@ -65,10 +65,10 @@
 				$str .= "\"description\" : \"". str_replace(array("\r", "\n"), '', $this->Description) . "\", ";
 				
 				//Replace os \
-				$str .= "\"picturespath\" : \"". str_replace(array("\\", "\\\\"), '', $this->PicturesPath) . "\", ";
+				//$str .= "\"picturespath\" : \"". str_replace("\\", "\\\\", $this->PicturesPath) . "\", ";
 				$str .= "\"weburlimage\" : \"". $this->ImageWebUrl() . "\", ";
 				$str .= "\"idparent\" : " . $parent . ", ";
-				$str .= "\"identifier\" : \"" . $this->Identifier . "\ ";
+				$str .= "\"identifier\" : \"" . $this->Identifier . "\"" ;
 
 			$str .= "}";
 			return $str;
