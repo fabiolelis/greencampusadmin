@@ -35,7 +35,7 @@
 					$str .= "\"datetime\" : \"". $this->DateTime . "\", ";
 					$str .= "\"location\" : \"". $this->Location . "\", ";
 					//$str .= "\"description\" : \"". $this->Description . "\", ";
-					$str .= "\"description\" : \"". str_replace(array("\r", "\n"), '', $this->Description) . "\" ";
+					$str .= "\"description\" : \"". str_replace(array("\r", "\n"), '', $this->Description) . "\" ",
 					$str .= "\"images\" : \"". $this->Images . "\", ";
 					$str .= "\"imagesweburl\" : \"". $this->ImageWebUrl() . "\", ";
 					$str .= "\"videos\" : \"". $this->Videos . "\" ";
