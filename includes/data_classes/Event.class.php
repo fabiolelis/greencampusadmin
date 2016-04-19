@@ -35,7 +35,7 @@
 					$str .= "\"datetime\" : \"". $this->DateTime . "\", ";
 					$str .= "\"location\" : \"". $this->Location . "\", ";
 					//$str .= "\"description\" : \"". $this->Description . "\", ";
-					$str .= "\"description\" : \"". str_replace(array("\r", "\n"), '', $this->Description) . "\" ",
+					$str .= "\"description\" : \"". str_replace(array("\r", "\n"), '', $this->Description) . "\", ";
 					$str .= "\"images\" : \"". $this->Images . "\", ";
 					$str .= "\"imagesweburl\" : \"". $this->ImageWebUrl() . "\", ";
 					$str .= "\"videos\" : \"". $this->Videos . "\" ";
@@ -58,7 +58,7 @@
 					$str .= "\"datetime\" : \"". $events->DateTime . "\", ";
 					$str .= "\"location\" : \"". $events->Location . "\", ";
 					//$str .= "\"description\" : \"". $events->Description . "\", ";
-					$str .= "\"description\" : \"". str_replace(array("\r", "\n"), '', $events->Description) . "\" ",
+					$str .= "\"description\" : \"". str_replace(array("\r", "\n"), '', $events->Description) . "\", ";
 					$str .= "\"images\" : \"". $events->Images . "\", ";
 					$str .= "\"imagesweburl\" : \"". $events->ImageWebUrl() . "\", ";
 					$str .= "\"videos\" : \"". $events->Videos . "\" ";
