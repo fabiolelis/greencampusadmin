@@ -42,7 +42,7 @@
 		}
 
 
-		public static function LoadArrayOfChildren($intIdcharacteristic){
+		public static function LoadArrayOfChildren($intIdcharacteristic, $objOptionalClauses = null){
 			return Characteristic::QueryArray(
 				QQ::Equal(QQN::Characteristic()->CharacteristicIdcharacteristicObject->Idcharacteristic, $intIdcharacteristic),
 
