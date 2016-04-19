@@ -58,7 +58,7 @@
 					$str .= "\"datetime\" : \"". $events->DateTime . "\", ";
 					$str .= "\"location\" : \"". $events->Location . "\", ";
 					//$str .= "\"description\" : \"". $events->Description . "\", ";
-					$str .= "\"description\" : \"". str_replace(array("\r", "\n"), '', $events->Description) . "\" ";
+					$str .= "\"description\" : \"". str_replace(array("\r", "\n"), '', $events->Description) . "\" ",
 					$str .= "\"images\" : \"". $events->Images . "\", ";
 					$str .= "\"imagesweburl\" : \"". $events->ImageWebUrl() . "\", ";
 					$str .= "\"videos\" : \"". $events->Videos . "\" ";
