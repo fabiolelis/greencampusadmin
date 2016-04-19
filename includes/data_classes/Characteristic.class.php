@@ -44,10 +44,38 @@
 
 		public static function LoadArrayOfChildren($intIdcharacteristic){
 			return Characteristic::QueryArray(
-				QQ::Equal(QQN::Characteristic()->Parent->Idcharacteristic, $intIdcharacteristic),
+				QQ::Equal(QQN::Characteristic()->CharacteristicIdcharacteristicObject->Idcharacteristic, $intIdcharacteristic),
 
 				$objOptionalClauses
 			);
+		}
+
+		public static function LoadTopsArrayBySpecies($intSpeciesid, $objOptionalClauses = null) {
+			// This will return an array of Characteristic objects
+			return Characteristic::QueryArray(
+				QQ::AndCondition(
+					QQ::Equal(QQN::Characteristic()->SpeciesIdspecies, $intSpeciesid),
+					QQ::Equal(QQN::Characteristic()->CharacteristicIdcharacteristic, null)
+				),
+				$objOptionalClauses
+			);
+		}
+
+		public function getChildrenJson($intIdcharacteristic){
+			
+			$charac = Characteristic::Load($intIdcharacteristic);
+			$str = $charac->getCharacsJson() ;
+			$arrayChildren = $this->LoadArrayOfChildren($intIdcharacteristic);
+			
+			foreach($arrayChildren as $children){
+				$str .= ",";
+				$str .= $this->getChildrenJson($children->Idcharacteristic);
+			} 
+//			$str = substr_replace($str, "", -1);
+
+			return $str;
+			
+
 		}
 
 		public function getCharacsJson(){

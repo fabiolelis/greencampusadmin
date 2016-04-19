@@ -80,11 +80,13 @@
 
 		public function getArrayCharacsJson(){
 
-			$characsArray = Characteristic::LoadArrayBySpecies($this->Idspecies);
+			$characsArray = Characteristic::LoadTopsArrayBySpecies($this->Idspecies);
+			//var_dump($characsArray);die();
 			$str = "\"characteristics\" : [";
 			
 			foreach ($characsArray as $charac) {
-				$str .= $charac->getCharacsJson();
+				$str .= $charac->getChildrenJson($charac->Idcharacteristic);
+
 				$str .= ",";
 			}
 			
