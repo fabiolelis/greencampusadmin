@@ -74,7 +74,7 @@
 
 
 		public function ImagesWebUrl(){
-			$strResturn = "";
+			$str = "";
 
 			$arrayImages = explode(";",$this->Images);
 
