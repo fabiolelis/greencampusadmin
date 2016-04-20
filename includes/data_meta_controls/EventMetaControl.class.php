@@ -252,7 +252,7 @@
 
 			$images = explode(";", $this->objEvent->Images);
 			//var_dump($images);die();
-			if ($images != null && $images[0] != null) 
+			if ($images != null && count($images) > 0 && $images[0] != null) 
 				$this->txtImages1->File = $images[0];
 
 			return $this->txtImages1;
@@ -272,7 +272,7 @@
 			$this->txtImages2->ClickToView = true;
 
 			$images = explode(";", $this->objEvent->Images);
-			if ($images && $images[1]) 
+			if ($images && count($images) > 1 && $images[1]) 
 				$this->txtImages2->File = $images[1];
 
 			return $this->txtImages2;
@@ -292,7 +292,7 @@
 			$this->txtImages3->ClickToView = true;
 
 			$images = explode(";", $this->objEvent->Images);
-			if ($images && $images[2]) 
+			if ($images && count($images) > 2 && $images[2]) 
 				$this->txtImages3->File = $images[2];
 
 			return $this->txtImages3;
