@@ -24,7 +24,11 @@
 
 		<?php $this->txtDescription->RenderWithName(); ?>
 
-		<?php $this->txtImages->RenderWithName(); ?>
+		<?php $this->txtImages1->RenderWithName(); ?>
+
+		<?php $this->txtImages2->RenderWithName(); ?>
+
+		<?php $this->txtImages3->RenderWithName(); ?>
 
 		<?php $this->txtVideos->RenderWithName(); ?>
 

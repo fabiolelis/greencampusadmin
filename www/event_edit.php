@@ -27,7 +27,11 @@
 		protected $calDateTime;
 		protected $txtLocation;
 		protected $txtDescription;
-		protected $txtImages;
+		
+		protected $txtImages1;
+		protected $txtImages2;
+		protected $txtImages3;
+
 		protected $txtVideos;
 
 		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
@@ -59,7 +63,11 @@
 			$this->calDateTime = $this->mctEvent->calDateTime_Create();
 			$this->txtLocation = $this->mctEvent->txtLocation_Create();
 			$this->txtDescription = $this->mctEvent->txtDescription_Create();
-			$this->txtImages = $this->mctEvent->txtImages_Create();
+			
+			$this->txtImages1 = $this->mctEvent->txtImages1_Create();
+			$this->txtImages2 = $this->mctEvent->txtImages2_Create();
+			$this->txtImages3 = $this->mctEvent->txtImages3_Create();
+
 			$this->txtVideos = $this->mctEvent->txtVideos_Create();
 
 			// Create Buttons and Actions on this Form

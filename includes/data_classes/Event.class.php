@@ -37,7 +37,7 @@
 					//$str .= "\"description\" : \"". $this->Description . "\", ";
 					$str .= "\"description\" : \"". str_replace(array("\r", "\n"), '', $this->Description) . "\", ";
 					$str .= "\"images\" : \"". $this->Images . "\", ";
-					$str .= "\"imagesweburl\" : \"". $this->ImageWebUrl() . "\", ";
+					$str .= "\"imagesweburl\" : \"". $this->ImagesWebUrl() . "\", ";
 					$str .= "\"videos\" : \"". $this->Videos . "\" ";
 
 
@@ -60,7 +60,7 @@
 					//$str .= "\"description\" : \"". $events->Description . "\", ";
 					$str .= "\"description\" : \"". str_replace(array("\r", "\n"), '', $events->Description) . "\", ";
 					$str .= "\"images\" : \"". $events->Images . "\", ";
-					$str .= "\"imagesweburl\" : \"". $events->ImageWebUrl() . "\", ";
+					$str .= "\"imagesweburl\" : \"". $events->ImagesWebUrl() . "\", ";
 					$str .= "\"videos\" : \"". $events->Videos . "\" ";
 				$str .= "},";
 
@@ -72,11 +72,26 @@
 
 		}
 
-		public function ImageWebUrl() {
+
+		public function ImagesWebUrl(){
+			$strResturn = "";
+
+			$arrayImages = explode(";",$this->Images);
+
+			for($i = 0; $i < 3; $i++) {
+				if($i < count($arrayImages) && $arrayImages[$i] != null && $arrayImages[$i] != "")
+					$str .= $this->ImageWebUrl($arrayImages[$i]) . ";";
+			}
+			return $str;
+		}
+
+
+		public function ImageWebUrl($str) {
 			
 			// Now, we need to see if the file, itself, is actually in the docroot somewhere so that
 			// it can be viewed, and if so, we need to return the web-based URL (relative to the docroot)
-			$str = $this->Images;
+
+			//$str = $this->Images;
 
 			if ($str) {
 

@@ -19,6 +19,113 @@
 	 * @subpackage MetaControls
 	 */
 	class EventMetaControl extends EventMetaControlGen {
+		
+		// General Variables
+		/**
+		 * @var Event objEvent
+		 * @access protected
+		 */
+		protected $objEvent;
+
+		/**
+		 * @var QForm|QControl objParentObject
+		 * @access protected
+		 */
+		protected $objParentObject;
+
+		/**
+		 * @var string  strTitleVerb
+		 * @access protected
+		 */
+		protected $strTitleVerb;
+
+		/**
+		 * @var boolean blnEditMode
+		 * @access protected
+		 */
+		protected $blnEditMode;
+
+		// Controls that allow the editing of Event's individual data fields
+        /**
+         * @var QLabel lblIdevent;
+         * @access protected
+         */
+		protected $lblIdevent;
+
+        /**
+         * @var QDateTimePicker calDateTime;
+         * @access protected
+         */
+		protected $calDateTime;
+
+        /**
+         * @var QTextBox txtLocation;
+         * @access protected
+         */
+		protected $txtLocation;
+
+        /**
+         * @var QTextBox txtDescription;
+         * @access protected
+         */
+		protected $txtDescription;
+
+        /**
+         * @var QTextBox txtImages;
+         * @access protected
+         */
+		protected $txtImages1;
+
+
+        /**
+         * @var QTextBox txtImages;
+         * @access protected
+         */
+		protected $txtImages2;
+
+		/**
+         * @var QTextBox txtImages;
+         * @access protected
+         */
+		protected $txtImages3;
+
+        /**
+         * @var QTextBox txtVideos;
+         * @access protected
+         */
+		protected $txtVideos;
+
+
+		// Controls that allow the viewing of Event's individual data fields
+        /**
+         * @var QLabel lblDateTime
+         * @access protected
+         */
+		protected $lblDateTime;
+
+        /**
+         * @var QLabel lblLocation
+         * @access protected
+         */
+		protected $lblLocation;
+
+        /**
+         * @var QLabel lblDescription
+         * @access protected
+         */
+		protected $lblDescription;
+
+        /**
+         * @var QLabel lblImages
+         * @access protected
+         */
+		protected $lblImages;
+
+        /**
+         * @var QLabel lblVideos
+         * @access protected
+         */
+		protected $lblVideos;
 		///////////////////////////////////////////////
 		// PUBLIC CREATE and REFRESH METHODS
 		///////////////////////////////////////////////
@@ -135,15 +242,60 @@
 		 * @param string $strControlId optional ControlId to use
 		 * @return QTextBox
 		 */
-		public function txtImages_Create($strControlId = null) {
-			$this->txtImages = new QFileAsset($this->objParentObject, $strControlId);
-			$this->txtImages->Name = QApplication::Translate('Images');
-			$this->txtImages->File = $this->objEvent->Images;
-			$this->txtImages->TemporaryUploadPath =  __DOCROOT__ . __IMAGE_ASSETS__ . "/events";
-			$this->txtImages->ClickToView = true;
+		public function txtImages1_Create($strControlId = null) {
+			
+			$this->txtImages1 = new QFileAsset($this->objParentObject, $strControlId);
+			$this->txtImages1->Name = QApplication::Translate('First Image');
+			//$this->txtImages1->File = $this->objEvent->Images;
+			$this->txtImages1->TemporaryUploadPath =  __DOCROOT__ . __IMAGE_ASSETS__ . "/events";
+			$this->txtImages1->ClickToView = true;
 
+			$images = explode(";", $this->objEvent->Images);
+			//var_dump($images);die();
+			if ($images != null && $images[0] != null) 
+				$this->txtImages1->File = $images[0];
 
-			return $this->txtImages;
+			return $this->txtImages1;
+		}
+
+		/**
+		 * Create and setup QTextBox txtImages
+		 * @param string $strControlId optional ControlId to use
+		 * @return QTextBox
+		 */
+		public function txtImages2_Create($strControlId = null) {
+
+			$this->txtImages2 = new QFileAsset($this->objParentObject, $strControlId);
+			$this->txtImages2->Name = QApplication::Translate('Second Image');
+			//$this->txtImages2->File = $this->objEvent->Images;
+			$this->txtImages2->TemporaryUploadPath =  __DOCROOT__ . __IMAGE_ASSETS__ . "/events";
+			$this->txtImages2->ClickToView = true;
+
+			$images = explode(";", $this->objEvent->Images);
+			if ($images && $images[1]) 
+				$this->txtImages2->File = $images[1];
+
+			return $this->txtImages2;
+		}
+
+		/**
+		 * Create and setup QTextBox txtImages
+		 * @param string $strControlId optional ControlId to use
+		 * @return QTextBox
+		 */
+		public function txtImages3_Create($strControlId = null) {
+
+			$this->txtImages3 = new QFileAsset($this->objParentObject, $strControlId);
+			$this->txtImages3->Name = QApplication::Translate('Third Image');
+			//$this->txtImages3->File = $this->objEvent->Images;
+			$this->txtImages3->TemporaryUploadPath =  __DOCROOT__ . __IMAGE_ASSETS__ . "/events";
+			$this->txtImages3->ClickToView = true;
+
+			$images = explode(";", $this->objEvent->Images);
+			if ($images && $images[2]) 
+				$this->txtImages3->File = $images[2];
+
+			return $this->txtImages3;
 		}
 
 		/**
@@ -153,8 +305,8 @@
 		 */
 		public function lblImages_Create($strControlId = null) {
 			$this->lblImages = new QLabel($this->objParentObject, $strControlId);
-			$this->lblImages->Name = QApplication::Translate('Images');
-			$this->lblImages->Text = $this->objEvent->Images;
+			$this->lblImages->Name = QApplication::Translate('Image');
+			$this->lblImages->Text = "Image";
 			return $this->lblImages;
 		}
 
@@ -165,7 +317,7 @@
 		 */
 		public function txtVideos_Create($strControlId = null) {
 			$this->txtVideos = new QTextBox($this->objParentObject, $strControlId);
-			$this->txtVideos->Name = QApplication::Translate('Videos');
+			$this->txtVideos->Name = QApplication::Translate('Video');
 			$this->txtVideos->Text = $this->objEvent->Videos;
 			$this->txtVideos->MaxLength = Event::VideosMaxLength;
 			return $this->txtVideos;
@@ -178,7 +330,7 @@
 		 */
 		public function lblVideos_Create($strControlId = null) {
 			$this->lblVideos = new QLabel($this->objParentObject, $strControlId);
-			$this->lblVideos->Name = QApplication::Translate('Videos');
+			$this->lblVideos->Name = QApplication::Translate('Video');
 			$this->lblVideos->Text = $this->objEvent->Videos;
 			return $this->lblVideos;
 		}
@@ -194,7 +346,22 @@
 				if ($this->calDateTime) $this->objEvent->DateTime = $this->calDateTime->DateTime;
 				if ($this->txtLocation) $this->objEvent->Location = $this->txtLocation->Text;
 				if ($this->txtDescription) $this->objEvent->Description = $this->txtDescription->Text;
-				if ($this->txtImages) $this->objEvent->Images = $this->txtImages->File;
+
+				$str = "";
+
+				//var_dump($this->txtImages1);die();
+				if ($this->txtImages1->File != null) 
+					$str .= $this->txtImages1->File . ";";	
+				if ($this->txtImages2->File != null) 
+					$str .= $this->txtImages2->File . ";";	
+				if ($this->txtImages3->File != null) 
+					$str .= $this->txtImages3->File . ";";	
+
+
+//				echo $str;die();
+				$this->objEvent->Images = $str;
+
+				
 				if ($this->txtVideos) $this->objEvent->Videos = $this->txtVideos->Text;
 
 				// Update any UniqueReverseReferences (if any) for controls that have been created for it
